@@ -29,7 +29,8 @@ document.getElementById('loginForm').onsubmit = function(e) {
     const encodedPassword = btoa(password);
 
     if (users[encodedUsername] && users[encodedUsername] === encodedPassword) {
-        localStorage.setItem('isLoggedIn', 'true');
+        // Сохраняем авторизацию в sessionStorage
+        sessionStorage.setItem('isLoggedIn', 'true');
 
         document.getElementById('loginModal').style.display = 'none';
         window.location.href = './images/lab_dashboard.html';

@@ -7,11 +7,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
-        if (localStorage.getItem('isLoggedIn') !== 'true') {
-            window.location.href = '../test.html'; // если не залогинен, выкидываем обратно
+        // Проверка на авторизацию через sessionStorage
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = './test.html'; // Если не залогинен, выкидываем обратно
         }
     </script>
-    
+
+<script>
+    document.getElementById('logoutBtn').onclick = function() {
+        // Очистка sessionStorage
+        sessionStorage.removeItem('isLoggedIn');
+        window.location.href = './test.html'; // Перенаправление на страницу входа
+    }
+</script>
+
     <style>
         :root {
             --primary-color: #2c3e50;

@@ -1162,6 +1162,165 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* Стили для секции обновлений */
+.updates-section {
+    padding: 60px 0;
+    background-color: #f6f8fb;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #003366;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 3px;
+    background-color: #003366;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.updates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.update-item {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+    display: flex;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.update-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.update-date {
+    background: linear-gradient(to bottom, #003366, #001f3f);
+    color: white;
+    padding: 20px;
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    text-align: center;
+}
+
+.update-content {
+    padding: 25px;
+    flex: 1;
+}
+
+.update-content h3 {
+    color: #003366;
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.update-content p {
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.update-link {
+    display: inline-block;
+    color: #0056b3;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 0;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.update-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #0056b3;
+    transition: width 0.3s;
+}
+
+.update-link:hover {
+    color: #003366;
+}
+
+.update-link:hover:after {
+    width: 100%;
+}
+
+/* Адаптивный дизайн для секции обновлений */
+@media (max-width: 768px) {
+    .update-item {
+        flex-direction: column;
+    }
+    
+    .update-date {
+        min-width: 100%;
+        padding: 15px;
+    }
+    
+    .section-title {
+        font-size: 28px;
+    }
+}
+
+/* Поддержка темного режима */
+body.dark-mode .updates-section {
+    background-color: #121212;
+}
+
+body.dark-mode .update-item {
+    background-color: #1f1f1f;
+    border-color: #2d2d2d;
+}
+
+body.dark-mode .update-content h3 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .update-content p {
+    color: #b0b0b0;
+}
+
+body.dark-mode .section-title {
+    color: #e0e0e0;
+}
+
+body.dark-mode .update-link {
+    color: #4f9dff;
+}
+
+body.dark-mode .update-link:after {
+    background-color: #4f9dff;
+}
+
     </style>
 </head>
 <body>
@@ -1477,7 +1636,7 @@
                 </div>
                 
                 <div class="gallery-item" data-caption="Процесс баллистической экспертизы">
-                    <img src="/api/placeholder/400/300" alt="Баллистическая экспертиза" class="gallery-image">
+                    <img src="./images/700.png" alt="Баллистическая экспертиза" class="gallery-image">
                     <div class="gallery-caption">Процесс баллистической экспертизы</div>
                 </div>
                 
@@ -1541,6 +1700,33 @@
                 <i class="fas fa-chevron-right"></i>
             </a>
         </section>
+
+        <section id="updates" class="updates-section">
+            <div class="container">
+                <h2 class="section-title">Обновления и изменения в составе</h2>
+                <div class="updates-list">
+                    <!-- Новость 1 -->
+                    <div class="update-item">
+                        <div class="update-date">27 апреля 2025</div>
+                        <div class="update-content">
+                            <h3>Новая вакансия: Криминалист</h3>
+                            <p>Мы ищем опытного криминалиста для работы в Лаборатории ФБР. Присоединяйтесь к нашей команде, если у вас есть опыт работы в судебной экспертизе и криминалистическом анализе.</p>
+                            <a href="#apply" class="update-link">Подать заявку</a>
+                        </div>
+                    </div>
+                    <!-- Новость 2 -->
+                    <div class="update-item">
+                        <div class="update-date">27 апреля 2025</div>
+                        <div class="update-content">
+                            <h3>Назначение нового эксперта-криминалиста лаборатории</h3>
+                            <p>Поздравляем Пето Берлускони с назначением на должность эксперта-криминалиста в нашу лабораторию. Уверены, что его опыт и профессионализм окажут значительное влияние на дальнейшее развитие нашей команды.</p>
+                            <a href="#news" class="update-link">Читать больше</a>
+                        </div>
+                    </div>
+                    <!-- Добавьте другие новости по аналогии -->
+                </div>
+            </div>
+        </section>        
         
         <!-- Contact Section -->
         <section id="contact" class="section fade-in">
@@ -1550,42 +1736,16 @@
                 </div>
                 <h2>Контакты</h2>
             </div>
-            
-            <p>По всем вопросам, связанным с работой Лаборатории ФБР, обращайтесь к руководству:</p>
             <br>
-            <button id="showContactForm" class="contact-button fade-in delay-1">
-                <i class="fas fa-paper-plane"></i> Отправить сообщение
-            </button>
-            
-            <div class="contact-form" id="contactForm">
-                <div class="form-group">
-                    <label class="form-label">Ваше имя:</label>
-                    <input type="text" class="form-input" placeholder="Введите ваше имя">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Ваш контакт:</label>
-                    <input type="text" class="form-input" placeholder="Telegram или другой способ связи">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Тема сообщения:</label>
-                    <input type="text" class="form-input" placeholder="Укажите тему сообщения">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Сообщение:</label>
-                    <textarea class="form-textarea" placeholder="Введите ваше сообщение"></textarea>
-                </div>
-                
-                <button class="form-submit" id="sendMessage">Отправить</button>
-            </div>
             
             <div class="mt-4">
-                <p>Или свяжитесь напрямую с администратором лаборатории:</p>
+                <p>По всем вопросам, связанным с работой Лаборатории ФБР, обращайтесь к руководству:</p>
                 <br>
                 <a href="https://t.me/JUMBO196" target="_blank" class="contact-button fade-in delay-2">
-                    <i class="fab fa-telegram"></i> Связаться с администратором
+                    <i class="fab fa-telegram"></i> Связаться с главой лаборатории.
+                </a>
+                <a href="https://t.me/sakurariley" target="_blank" class="contact-button fade-in delay-2">
+                    <i class="fab fa-telegram"></i> Связаться с заместителем главы лаборатории.
                 </a>
             </div>
         </section>
@@ -1622,7 +1782,7 @@
                     <p>Лаборатория ФБР занимается судебной экспертизой, криминалистическим анализом и медицинской экспертизой для нужд Федерального Бюро Расследований и других государственных органов.</p>
                     
                     <div class="footer-social">
-                        <a href="https://t.me/+i3NGs0lo-E45NDVi" class="social-icon" target="_blank" rel="noopener noreferrer">
+                        <a href="https://t.me/+D2fDRkbqPG1kZDcy" class="social-icon" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-telegram"></i>
                         </a>
                         <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>

@@ -1321,6 +1321,182 @@ body.dark-mode .update-link:after {
     background-color: #4f9dff;
 }
 
+/* Стили для модального окна авторизации */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    overflow: auto;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 10% auto;
+    max-width: 450px;
+    width: 90%;
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: slideDown 0.4s ease;
+    border-top: 5px solid #3498db;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.close:hover {
+    color: #2c3e50;
+    transform: scale(1.1);
+}
+
+.modal-content h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.modal-content h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #3498db;
+}
+
+#loginForm {
+    margin-top: 1.5rem;
+}
+
+#loginForm label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+#loginForm input[type="text"],
+#loginForm input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+#loginForm input[type="text"]:focus,
+#loginForm input[type="password"]:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+#loginForm button {
+    width: 100%;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 14px 0;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.8rem;
+    box-shadow: 0 3px 8px rgba(52, 152, 219, 0.3);
+}
+
+#loginForm button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(52, 152, 219, 0.4);
+}
+
+#loginForm button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+}
+
+/* Добавление иконок (требуется Font Awesome) */
+#loginForm label[for="username"]:before {
+    content: "\f007";
+    font-family: "Font Awesome 5 Free";
+    margin-right: 8px;
+    color: #3498db;
+}
+
+#loginForm label[for="password"]:before {
+    content: "\f023";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 8px;
+    color: #3498db;
+}
+
+/* Стиль для сообщения об ошибке */
+.error-message {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-top: -0.8rem;
+    margin-bottom: 1rem;
+    padding-left: 3px;
+    display: none;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 576px) {
+    .modal-content {
+        margin: 20% auto;
+        padding: 1.8rem;
+    }
+    
+    .modal-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    #loginForm input[type="text"],
+    #loginForm input[type="password"] {
+        padding: 10px 12px;
+    }
+    
+    #loginForm button {
+        padding: 12px 0;
+    }
+}
     </style>
 </head>
 <body>
@@ -1361,9 +1537,27 @@ body.dark-mode .update-link:after {
                 <li><a href="#gallery"><i class="fas fa-images"></i> Галерея</a></li>
                 <li><a href="#links"><i class="fas fa-link"></i> Ссылки</a></li>
                 <li><a href="#contact"><i class="fas fa-envelope"></i> Контакты</a></li>
+                <li><a href="#" id="loginBtn">Войти</a></li>
             </ul>
         </div>
     </nav>
+
+    <!-- Модальное окно для входа -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Авторизация</h2>
+            <form id="loginForm">
+                <label for="username">Логин:</label>
+                <input type="text" id="username" name="username" required><br><br>
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <button type="submit">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
     
     <!-- Hero Section -->
     <section class="hero-section" id="home">

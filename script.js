@@ -33,7 +33,7 @@ document.getElementById('loginForm').onsubmit = function(e) {
         sessionStorage.setItem('isLoggedIn', 'true');
 
         document.getElementById('loginModal').style.display = 'none';
-        window.location.href = '.lab_dashboard.html';
+        window.location.href = './images/lab_dashboard.html';
     } else {
         alert('Неверный логин или пароль');
     }

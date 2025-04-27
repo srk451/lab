@@ -15,20 +15,26 @@ window.onclick = function(event) {
     }
 };
 
+// Зашифрованные логины и пароли (в base64 формате)
+const users = {
+    "c3Jr": "c2lzZW1iYWV2",
+    "Y2F2YWxsaQ==": "Y2F2YWxsaTEyMzQ=",
+    "bGFi": "MTIzNA=="
+    // можешь добавить ещё пользователей сюда
+};
+
 // Проверка логина и пароля при отправке формы
 document.getElementById('loginForm').onsubmit = function(e) {
     e.preventDefault();
 
-    // Получаем логин и пароль
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
 
-    // Пример проверки логина и пароля
-    if (username === 'lab' && password === '1234') {
-        // Закрытие модального окна
+    const encodedUsername = btoa(username);
+    const encodedPassword = btoa(password);
+
+    if (users[encodedUsername] && users[encodedUsername] === encodedPassword) {
         document.getElementById('loginModal').style.display = 'none';
-        
-        // Перенаправление на страницу lab_dashboard.html
         window.location.href = './images/lab_dashboard.html';
     } else {
         alert('Неверный логин или пароль');

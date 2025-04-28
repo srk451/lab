@@ -477,6 +477,7 @@
             
             // Проверка на совпадение с данными в объекте "users"
             if (users[encodedUsername] && users[encodedUsername].password === encodedPassword) {
+                sessionStorage.setItem('loggedIn', 'true');
                 // Анимация успешного входа
                 loginBtn.innerHTML = '<i class="fas fa-check"></i> Доступ разрешен';
                 loginBtn.style.backgroundColor = 'var(--success-color)';
@@ -486,11 +487,11 @@
                 
                 setTimeout(() => {
                     if (userRole === 'owner') {
-                        window.location.href = './test.html';  // Для владельца
+                        window.location.href = './lab.html';  // Для владельца
                     } else if (userRole === 'admin') {
-                        window.location.href = './test.html';  // Для администратора
+                        window.location.href = './lab.html';  // Для администратора
                     } else if (userRole === 'user') {
-                        window.location.href = './test.html';  // Для обычного пользователя
+                        window.location.href = './lab.html';  // Для обычного пользователя
                     } else {
                         errorText.textContent = 'Роль не определена';
                         errorMessage.style.display = 'flex';

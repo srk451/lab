@@ -6,6 +6,12 @@
     <title>Лаборатория ФБР | ADV-RP</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+       // Проверка на авторизацию через sessionStorage
+       if (!sessionStorage.getItem('loggedIn')) {
+    window.location.href = './login.html';
+}
+    </script>
     <style>
         :root {
             --primary-color: #1a73e8;
@@ -1525,7 +1531,7 @@ body.dark-mode .update-link:after {
                 <li><a href="#gallery"><i class="fas fa-images"></i> Галерея</a></li>
                 <li><a href="#links"><i class="fas fa-link"></i> Ссылки</a></li>
                 <li><a href="#contact"><i class="fas fa-envelope"></i> Контакты</a></li>
-                <li><a href="./images/test2.html"><i class="fas fa-cogs"></i> История изм.</a></li>
+                <li><a href="./images/hislab.html"><i class="fas fa-cogs"></i> История изм.</a></li>
                 <li><a href="#" id="loginBtn">Войти</a></li>
             </ul>
         </div>
@@ -1690,6 +1696,18 @@ body.dark-mode .update-link:after {
                     <div class="staff-name">Peto Berlusconi</div>
                     <div class="staff-contact">
                         <i class="fab fa-telegram"></i>@vadmyr
+                    </div>
+                </div>
+
+                <div class="staff-member">
+                    <div class="staff-status"></div>
+                    <div class="staff-avatar">
+                        <img src="images/mikhail_voronov.png" alt="Mikhail Voronov" class="avatar-image">
+                    </div>
+                    <div class="staff-position">Forensic expert</div>
+                    <div class="staff-name">Mikhail Voronov</div>
+                    <div class="staff-contact">
+                        <i class="fab fa-telegram"></i>@mkhlfit
                     </div>
                 </div>
 

@@ -8,16 +8,16 @@
 
     <script>
         // Проверка на авторизацию через sessionStorage
-        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
-            window.location.href = './test.html'; // Если не залогинен, выкидываем обратно
-        }
-    </script>
+        if (!sessionStorage.getItem('loggedIn')) {
+     window.location.href = '../login.html';
+ }
+     </script>
 
 <script>
     document.getElementById('logoutBtn').onclick = function() {
         // Очистка sessionStorage
         sessionStorage.removeItem('isLoggedIn');
-        window.location.href = './test.html'; // Перенаправление на страницу входа
+        window.location.href = './lab.html'; // Перенаправление на страницу входа
     }
 </script>
 

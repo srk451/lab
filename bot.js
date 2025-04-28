@@ -5,7 +5,8 @@ const token = '7268248925:AAHmWrNJvOWIsq1SroDGX_Awro7pWDHWcuI';
 const users = {
     '6924074231': 'owner', // Пример владельца (userId -> роль)
     '1234567890': 'tech.admin', // Пример технического администратора
-    '9876543210': 'admin' // Пример обычного администратора
+    '9876543210': 'admin', // Пример обычного администратора
+    '12312414': 'director'
 };
 
 const groupChatId = '-1002543988238'; // ID вашей группы
@@ -32,6 +33,9 @@ bot.onText(/\/start/, (msg) => {
             break;
         case 'admin':
             greetingMessage = 'Привет, администратор!';
+            break;
+        case 'director':
+            greetingMessage = 'Привет, Директор FBI!';
             break;
         default:
             greetingMessage = 'Привет, пользователь!';

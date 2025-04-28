@@ -1,6 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
+const express = require('express');
+const app = express();
 
-// Замените на свой API токен, который вы получили от BotFather
 const token = '7268248925:AAHmWrNJvOWIsq1SroDGX_Awro7pWDHWcuI';
 
 // Создаем бота с поллингом
@@ -20,4 +21,15 @@ bot.on('message', (msg) => {
     } else {
         bot.sendMessage(chatId, 'Я тебя не понял. Напиши "Привет".');
     }
+});
+
+// Создаем простой маршрут для поддержания работы бота
+app.get('/', (req, res) => {
+    res.send('Бот работает!');
+});
+
+// Запускаем Express сервер на порту, который определен в Heroku
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Сервер работает на порту ${port}`);
 });

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/srk451/lab#readme",
   "description": "",
   "dependencies": {
+    "express": "^5.1.0",
     "node-telegram-bot-api": "^0.66.0"
   }
 }

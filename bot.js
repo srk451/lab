@@ -1,15 +1,19 @@
 const TelegramBot = require('node-telegram-bot-api');
 
+// Токен бота
 const token = '7268248925:AAHmWrNJvOWIsq1SroDGX_Awro7pWDHWcuI';
-// Массив с ролями пользователей
+
+// Массив с ролями пользователей (пример)
 const users = {
-    '6924074231': 'owner', // Пример владельца (userId -> роль)
+    '6924074231': 'owner', // Пример владельца
     '1234567890': 'tech.admin', // Пример технического администратора
     '9876543210': 'admin', // Пример обычного администратора
-    '12312414': 'director'
+    '12312414': 'director' // Пример директора
 };
 
 const groupChatId = '-1002543988238'; // ID вашей группы
+const adminChatId = '1234567890'; // Chat ID для отправки запросов администратору
+const adminUserIds = ['1234567890', '9876543210']; // Список ID администраторов
 
 // Создаем бота с поллингом
 const bot = new TelegramBot(token, { polling: true });
@@ -56,11 +60,6 @@ bot.onText(/\/send_request (.+)/, (msg, match) => {
     bot.sendMessage(chatId, 'Ваш запрос был отправлен! Мы с вами свяжемся в ближайшее время.');
 });
 
-bot.on('message', (msg) => {
-    console.log(msg.chat.id); // ID чата будет выводиться в консоль
-});
-
-
 // Обработка команды /test Салам
 bot.onText(/\/test (.+)/, (msg, match) => {
     const chatId = msg.chat.id;
@@ -82,6 +81,28 @@ bot.onText(/\/test (.+)/, (msg, match) => {
     }
 });
 
+// Логируем все сообщения
+bot.on('message', (msg) => {
+    console.log(msg.chat.id); // ID чата будет выводиться в консоль
+});
+
+// Обработка ошибок
 bot.on('polling_error', (error) => {
     console.log(error);  // Логируем ошибку
-  });
+});
+
+// Если используете express сервер, вот как он может выглядеть:
+const express = require('express');
+const app = express();
+
+// Простой роут для запуска сервера (например, на платформе типа Heroku)
+app.get('/', (req, res) => {
+    res.send('Bot is running!');
+});
+
+// Используем порт от Heroku, если он задан, или порт 3000 для локальной разработки
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});

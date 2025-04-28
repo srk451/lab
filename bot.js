@@ -42,7 +42,7 @@ bot.onText(/\/start/, (msg) => {
             greetingMessage = 'Привет, Директор FBI!';
             break;
         default:
-            greetingMessage = 'Привет, пользователь!';
+            greetingMessage = 'Добро пожаловать в нашу систему!\n\nУ вас нет зарегистрированной учетной записи. Свяжитесь с администратором для получения доступа.\n\nАдминистраторы:\n@sakurariley - tech.admin\n@JUMBO196 - tech.admin';
     }
 
     bot.sendMessage(chatId, greetingMessage);

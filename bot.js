@@ -10,16 +10,16 @@ const bot = new TelegramBot(token, { polling: true });
 // Слушаем команду /start
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
-    bot.sendMessage(chatId, 'Привет! Я твой бот!');
+    bot.sendMessage(chatId, 'Привет Тима, это я Serik! Иди нахуй.');
 });
 
 // Слушаем любые текстовые сообщения
 bot.on('message', (msg) => {
     const chatId = msg.chat.id;
     if (msg.text.toLowerCase() === 'привет') {
-        bot.sendMessage(chatId, 'Привет, как я могу помочь?');
+        bot.sendMessage(chatId, 'Что привет нахуй. Пошёл Нахуй.');
     } else {
-        bot.sendMessage(chatId, 'Я тебя не понял. Напиши "Привет".');
+        bot.sendMessage(chatId, 'Напиши "Привет".');
     }
 });
 

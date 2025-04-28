@@ -28,8 +28,8 @@ app.get('/', (req, res) => {
     res.send('Бот работает!');
 });
 
-// Запускаем Express сервер на порту, который определен в Heroku
-const port = process.env.PORT || 3000;
+// Запускаем Express сервер, который слушает на правильном порту
+const port = process.env.PORT || 3000;  // Используем PORT от Heroku или 3000, если он не задан
 app.listen(port, () => {
     console.log(`Сервер работает на порту ${port}`);
 });

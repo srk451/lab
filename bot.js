@@ -1433,3 +1433,8 @@ if (statusText.length > 50) {
   bot.sendMessage(chatId, `✅ Ваш статус успешно изменен на: "${statusText}"`);
   logMessage(`User ${userId} set custom status: ${statusText}`);
 });
+
+const port = process.env.PORT || 3000; // Слушаем порт, который предоставляет Heroku или 3000 по умолчанию
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});

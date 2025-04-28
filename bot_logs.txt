@@ -1,0 +1,36 @@
+[2025-04-28T15:03:32.322Z] INFO: User 6924074231 (Mark Travmatov) started the bot
+[2025-04-28T15:05:45.885Z] INFO: User 6924074231 (Mark Travmatov) started the bot
+[2025-04-28T15:06:16.108Z] INFO: User 996317285 (Неизвестный) started the bot
+[2025-04-28T15:09:37.998Z] INFO: User 6924074231 (Mark Travmatov) sent message to group: тест...
+[2025-04-28T15:10:26.771Z] INFO: User 6924074231 (Mark Travmatov) made an announcement
+[2025-04-28T15:10:50.350Z] INFO: User 7641335469 (Неизвестный) started the bot
+[2025-04-28T15:12:16.895Z] ERROR: Failed to send broadcast to 3123: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:12:17.045Z] ERROR: Failed to send broadcast to 342432: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:12:17.421Z] ERROR: Failed to send broadcast to 1234567890: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:12:17.640Z] INFO: User 6924074231 sent broadcast message to 2 users (3 failed)
+[2025-04-28T15:15:37.268Z] ERROR: Failed to send broadcast to 3123: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:15:37.409Z] ERROR: Failed to send broadcast to 342432: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:15:37.579Z] ERROR: Failed to send broadcast to 1234567890: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:15:37.771Z] INFO: User 6924074231 sent broadcast message to 1 users (3 failed)
+[2025-04-28T15:15:41.444Z] ERROR: Failed to send broadcast to 3123: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:15:41.617Z] ERROR: Failed to send broadcast to 342432: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:15:41.867Z] ERROR: Failed to send broadcast to 1234567890: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:15:42.128Z] INFO: User 6924074231 sent broadcast message to 1 users (3 failed)
+[2025-04-28T15:15:52.384Z] ERROR: Failed to send broadcast to 3123: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:15:52.574Z] ERROR: Failed to send broadcast to 342432: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:15:52.778Z] ERROR: Failed to send broadcast to 1234567890: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:15:53.038Z] INFO: User 6924074231 sent broadcast message to 1 users (3 failed)
+[2025-04-28T15:16:02.055Z] ERROR: Failed to send broadcast to 3123: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:16:02.167Z] ERROR: Failed to send broadcast to 342432: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:16:02.285Z] ERROR: Failed to send broadcast to 1234567890: ETELEGRAM: 400 Bad Request: chat not found
+[2025-04-28T15:16:02.506Z] INFO: User 6924074231 sent broadcast message to 1 users (3 failed)
+[2025-04-28T15:31:07.291Z] ИНФОРМАЦИЯ: User 6924074231 (Mark Travmatov) started the bot
+[2025-04-28T15:36:56.369Z] ИНФОРМАЦИЯ: User 6924074231 (Mark Travmatov) started the bot
+[2025-04-28T15:37:15.818Z] ИНФОРМАЦИЯ: User 6924074231 (Mark Travmatov) started the bot
+[2025-04-28T15:37:24.874Z] ИНФОРМАЦИЯ: User 996317285 (Неизвестный) started the bot
+[2025-04-28T15:38:40.870Z] ИНФОРМАЦИЯ: User 996317285 (sssssrkd) started the bot
+[2025-04-28T15:38:56.780Z] ИНФОРМАЦИЯ: User 996317285 (sssssrkd) started the bot
+[2025-04-28T15:39:27.553Z] ИНФОРМАЦИЯ: User 996317285 (sssssrkd) started the bot
+[2025-04-28T15:39:39.959Z] ИНФОРМАЦИЯ: User 996317285 (sssssrkd) started the bot
+[2025-04-28T15:40:16.039Z] ИНФОРМАЦИЯ: User 996317285 (sssssrkd) started the bot
+[2025-04-28T15:40:31.433Z] ИНФОРМАЦИЯ: User 996317285 (sssssrkd) started the bot

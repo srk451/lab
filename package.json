@@ -18,8 +18,10 @@
   "homepage": "https://github.com/srk451/lab#readme",
   "description": "",
   "dependencies": {
+    "axios": "^1.9.0",
     "body-parser": "^2.2.0",
     "express": "^5.1.0",
+    "node-schedule": "^2.1.1",
     "node-telegram-bot-api": "^0.66.0"
   }
 }

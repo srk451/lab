@@ -1,0 +1,9 @@
+{
+  "welcomeMessage": "Добро пожаловать в нашу систему!",
+  "notificationEnabled": true,
+  "maintenanceMode": false,
+  "maxWarnings": 3,
+  "muteDuration": 3600,
+  "language": "ru",
+  "lastModified": "2025-04-28T15:03:25.395Z"
+}

@@ -850,9 +850,9 @@
         }
         
         body.dark-mode .theme-toggle {
-            color: #f4f4f4;
-            background-color: rgba(255,255,255,0.05);
-        }
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #f4f4f4;
+}
         
         /* Анимации и эффекты */
         @keyframes fadeIn {
@@ -962,21 +962,6 @@
             max-height: 80%;
         }
         
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        
-        .close:hover {
-            color: var(--fbi-gold);
-        }
-        
         /* Стили для кнопки связаться */
         .contact-form {
             display: none;
@@ -1072,17 +1057,19 @@
             font-weight: 500;
             border-bottom: 2px solid transparent;
             transition: all 0.3s;
+            display: inline-block;
         }
         
         .tab.active {
-            color: var(--primary-color);
-            border-bottom-color: var(--primary-color);
+            color: #007BFF;
+            border-bottom-color: #007BFF;
         }
-        
+
         .tab-content {
             display: none;
+            margin-top: 20px;
         }
-        
+
         .tab-content.active {
             display: block;
             animation: fadeIn 0.5s;
@@ -1497,6 +1484,7 @@ body.dark-mode .update-link:after {
         padding: 12px 0;
     }
 }
+
     </style>
 </head>
 <body>
@@ -1537,6 +1525,7 @@ body.dark-mode .update-link:after {
                 <li><a href="#gallery"><i class="fas fa-images"></i> Галерея</a></li>
                 <li><a href="#links"><i class="fas fa-link"></i> Ссылки</a></li>
                 <li><a href="#contact"><i class="fas fa-envelope"></i> Контакты</a></li>
+                <li><a href="./images/test2.html"><i class="fas fa-cogs"></i> История изм.</a></li>
                 <li><a href="#" id="loginBtn">Войти</a></li>
             </ul>
         </div>
@@ -1663,10 +1652,10 @@ body.dark-mode .update-link:after {
                 <div class="staff-member">
                     <div class="staff-status"></div>
                     <div class="staff-avatar">
-                        <img src="images/leonardo_cavalli.png" alt="Leonardo Cavalli" class="avatar-image">
+                        <img src="images/leonardo_cavalli.png" alt="Svyatoslav Travmatov" class="avatar-image">
                     </div>
                     <div class="staff-position">Head of LAB</div>
-                    <div class="staff-name">Leonardo Cavalli</div>
+                    <div class="staff-name">Svyatoslav Travmatov</div>
                     <div class="staff-contact">
                         <i class="fab fa-telegram"></i>@JUMBO196
                     </div>
@@ -1675,10 +1664,10 @@ body.dark-mode .update-link:after {
                 <div class="staff-member">
                     <div class="staff-status"></div>
                     <div class="staff-avatar">
-                        <img src="images/sakura_riley.png" alt="Sakura Riley" class="avatar-image">
+                        <img src="images/sakura_riley.png" alt="Mark Travmatov" class="avatar-image">
                     </div>
                     <div class="staff-position">D. Head of LAB</div>
-                    <div class="staff-name">Sakura Riley</div>
+                    <div class="staff-name">Mark Travmatov</div>
                     <div class="staff-contact">
                         <i class="fab fa-telegram"></i>@sakurariley
                     </div>
@@ -1947,7 +1936,7 @@ body.dark-mode .update-link:after {
     
     <!-- Галерея модальное окно -->
     <div id="galleryModal" class="modal">
-        <span class="close">&times;</span>
+        <!-- <span class="close">&times;</span> -->
         <img class="modal-content" id="modalImage">
     </div>
     
@@ -2005,7 +1994,7 @@ body.dark-mode .update-link:after {
             </div>
             
             <div class="footer-copyright">
-                © Лаборатория ФБР ADV-RP, 2025. Последнее обновление: 27.04.2025 | Sakura Riley.
+                © Лаборатория ФБР ADV-RP, 2025. Последнее обновление: 28.04.2025 | Sakura Riley.
             </div>
         </div>
     </footer>
@@ -2094,18 +2083,28 @@ statNumbers.forEach(number => {
             
             // Галерея - модальное окно
             const galleryItems = document.querySelectorAll('.gallery-item');
-            const modal = document.getElementById('galleryModal');
-            const modalImg = document.getElementById('modalImage');
-            
-            galleryItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    modal.style.display = "block";
-                    modalImg.src = this.querySelector('img').src;
-                });
-            });
-            
-            document.querySelector('.close').addEventListener('click', function() {
-                modal.style.display = "none";
+    const modal = document.getElementById('galleryModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeBtn = document.querySelector('.close'); // Кнопка закрытия
+
+    // Открытие модального окна при клике на изображение
+    galleryItems.forEach(item => {
+        item.addEventListener('click', function() {
+            modal.style.display = "block";  // Показываем модальное окно
+            modalImg.src = this.querySelector('img').src; // Устанавливаем источник изображения
+        });
+    });
+
+    // Закрытие модального окна при клике на крестик
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = "none";  // Скрываем модальное окно
+    });
+
+    // Закрытие модального окна при клике вне изображения (на фоне)
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";  // Если клик по области модального окна, скрыть его
+        }
             });
             
             // Форма контактов
@@ -2143,18 +2142,18 @@ statNumbers.forEach(number => {
             
             // Темная тема
             const themeToggle = document.getElementById('themeToggle');
-            const themeIcon = themeToggle.querySelector('i');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
             
-            themeToggle.addEventListener('click', function() {
-                document.body.classList.toggle('dark-mode');
-                
-                if (document.body.classList.contains('dark-mode')) {
-                    themeIcon.classList.remove('fa-moon');
-                    themeIcon.classList.add('fa-sun');
-                } else {
-                    themeIcon.classList.remove('fa-sun');
-                    themeIcon.classList.add('fa-moon');
-                }
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
             });
             
             // Табы для регламента
@@ -2211,5 +2210,68 @@ statNumbers.forEach(number => {
             });
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+    
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Убираем активные классы
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+    
+                    // Делаем активной нажатую вкладку
+                    tab.classList.add('active');
+    
+                    // И контент, который связан с этой вкладкой
+                    const id = tab.getAttribute('data-tab');
+                    document.getElementById(id).classList.add('active');
+                });
+            });
+        });
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Обработка вкладок
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.tab-content');
+    
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Убираем активные классы
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+    
+                // Делаем активной нажатую вкладку
+                tab.classList.add('active');
+    
+                // И контент, который связан с этой вкладкой
+                const id = tab.getAttribute('data-tab');
+                document.getElementById(id).classList.add('active');
+            });
+        });
+
+        // Темная тема
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            // Переключаем класс dark-mode для body
+            document.body.classList.toggle('dark-mode');
+
+            // Обновляем иконку в зависимости от состояния
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

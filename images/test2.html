@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система управления лаборантами</title>
+    <!-- Добавление Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #f4f7f9;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --accent-color: #9b59b6;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--secondary-color), #34495e);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        header h1 i {
+            margin-right: 12px;
+            font-size: 1.8rem;
+        }
+        
+        h1, h2, h3 {
+            color: var(--secondary-color);
+        }
+        
+        h1 {
+            margin-top: 0;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .card-header h2 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-header h2 i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-left: 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .badge i {
+            margin-right: 5px;
+        }
+        
+        .badge-current {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .badge-ex {
+            background-color: var(--warning-color);
+            color: white;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        li {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+        
+        li:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+        
+        li:last-child {
+            border-bottom: none;
+        }
+        
+        .history-item {
+            position: relative;
+            border-left: 4px solid var(--primary-color);
+            background-color: rgba(52, 152, 219, 0.05);
+            margin-bottom: 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            padding-left: 20px;
+        }
+        
+        .history-item:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .history-description {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .history-description i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .history-date {
+            color: #777;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .history-date i {
+            margin-right: 5px;
+            color: #888;
+        }
+        
+        .lab-person {
+            display: flex;
+            align-items: center;
+        }
+        
+        .lab-person img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .lab-person:hover img {
+            transform: scale(1.1);
+            border-color: var(--accent-color);
+        }
+        
+        .lab-person-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .lab-person-name {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .lab-person-role {
+            font-size: 0.85rem;
+            color: #777;
+            margin-top: 3px;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .search-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .search-wrapper i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+        
+        .tab-controls {
+            display: flex;
+            margin-bottom: 25px;
+            background-color: #eaeff2;
+            border-radius: 10px;
+            padding: 5px;
+        }
+        
+        .tab-button {
+            background-color: transparent;
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer;
+            flex-grow: 1;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+        
+        .tab-button i {
+            margin-right: 8px;
+        }
+        
+        .tab-button:hover {
+            background-color: rgba(255, 255, 255, 0.6);
+            color: var(--primary-color);
+        }
+        
+        .tab-button.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .add-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 3px 8px rgba(52, 152, 219, 0.25);
+        }
+        
+        .add-button i {
+            margin-right: 8px;
+        }
+        
+        .add-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(52, 152, 219, 0.35);
+        }
+        
+        .transfer-button {
+            background-color: var(--warning-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .transfer-button i {
+            margin-right: 5px;
+        }
+        
+        .transfer-button:hover {
+            background-color: #e67e22;
+        }
+        
+        .empty-message {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+            font-style: italic;
+            background-color: rgba(0, 0, 0, 0.02);
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .skill-tag {
+            display: inline-block;
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--primary-color);
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            margin-right: 5px;
+        }
+        
+        /* Добавляем модальное окно для добавления записей */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 25px;
+            border-radius: 12px;
+            width: 500px;
+            max-width: 90%;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+            animation: slideIn 0.4s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            color: var(--secondary-color);
+        }
+        
+        .close-modal {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--danger-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-secondary {
+            background-color: #e0e0e0;
+            color: #666;
+            margin-right: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #d0d0d0;
+        }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .tab-button {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .tab-button i {
+                margin-right: 5px;
+            }
+            
+            .lab-person img {
+                width: 40px;
+                height: 40px;
+            }
+            
+            li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .lab-person {
+                margin-bottom: 10px;
+            }
+            
+            .transfer-button {
+                align-self: flex-end;
+                margin-top: 10px;
+            }
+            
+            .history-date {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-flask"></i> Система управления лаборантами</h1>
+    </header>
+    
+    <div class="container">
+        <div class="tab-controls">
+            <button class="tab-button active" data-tab="history-tab">
+                <i class="fas fa-history"></i> История изменений
+            </button>
+            <button class="tab-button" data-tab="current-lab-tab">
+                <i class="fas fa-users"></i> Текущие лаборанты
+            </button>
+            <button class="tab-button" data-tab="ex-lab-tab">
+                <i class="fas fa-user-slash"></i> Экс-лаборанты
+            </button>
+        </div>
+        
+        <div id="history-tab" class="tab-content active">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-clipboard-list"></i> История изменений</h2>
+                    <button class="add-button" id="add-history-btn">
+                        <i class="fas fa-plus"></i> Добавить запись
+                    </button>
+                </div>
+                <div class="search-wrapper">
+                    <input type="text" class="search-box" id="history-search" placeholder="Поиск по истории изменений...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div id="history">
+                    <ul id="history-list">
+                        <!-- История изменений будет динамически добавляться с помощью JS -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="current-lab-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>
+                        <i class="fas fa-user-check"></i> Текущие лаборанты 
+                        <span class="badge badge-current">
+                            <i class="fas fa-users"></i> <span id="current-count">0</span>
+                        </span>
+                    </h2>
+                    <button class="add-button" id="add-current-lab-btn">
+                        <i class="fas fa-user-plus"></i> Добавить лаборанта
+                    </button>
+                </div>
+                <div class="search-wrapper">
+                    <input type="text" class="search-box" id="current-lab-search" placeholder="Поиск по текущим лаборантам...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <ul id="current-lab">
+                    <!-- Текущие лаборанты -->
+                </ul>
+            </div>
+        </div>
+        
+        <div id="ex-lab-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>
+                        <i class="fas fa-user-slash"></i> Экс-лаборанты 
+                        <span class="badge badge-ex">
+                            <i class="fas fa-user-times"></i> <span id="ex-count">0</span>
+                        </span>
+                    </h2>
+                </div>
+                <div class="search-wrapper">
+                    <input type="text" class="search-box" id="ex-lab-search" placeholder="Поиск по экс-лаборантам...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <ul id="ex-lab">
+                    <!-- Экс-лаборанты -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Модальное окно для добавления записи в историю -->
+    <div id="history-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-plus-circle"></i> Добавить запись в историю</h3>
+                <span class="close-modal" id="close-history-modal">&times;</span>
+            </div>
+            <div class="form-group">
+                <label for="history-description">Описание изменения:</label>
+                <input type="text" class="form-control" id="history-description" placeholder="Введите описание изменения">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-history">Отмена</button>
+                <button class="btn btn-primary" id="save-history">Сохранить</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Модальное окно для добавления лаборанта -->
+    <div id="lab-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> Добавить лаборанта</h3>
+                <span class="close-modal" id="close-lab-modal">&times;</span>
+            </div>
+            <div class="form-group">
+                <label for="lab-name">ФИО лаборанта:</label>
+                <input type="text" class="form-control" id="lab-name" placeholder="Введите ФИО лаборанта">
+            </div>
+            <div class="form-group">
+                <label for="lab-role">Должность:</label>
+                <input type="text" class="form-control" id="lab-role" placeholder="Введите должность">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-lab">Отмена</button>
+                <button class="btn btn-primary" id="save-lab">Сохранить</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Данные для истории изменений
+        const historyData = [
+            { 
+                description: 'Обновлены профили всех лаборантов',
+                date: '27 апреля 2025 года',
+                icon: 'fa-refresh'
+            },
+            { 
+                description: 'Добавлено новое изменение',
+                date: '25 апреля 2025 года',
+                icon: 'fa-plus'
+            },
+            { 
+                description: 'Обновление данных лаборанта Петровой М.А.',
+                date: '20 апреля 2025 года',
+                icon: 'fa-user-edit'
+            },
+            { 
+                description: 'Кузнецова Ирина переведена в экс-лаборанты',
+                date: '15 апреля 2025 года',
+                icon: 'fa-user-slash'
+            },
+            { 
+                description: 'Добавлен новый лаборант Петрова Мария',
+                date: '10 апреля 2025 года',
+                icon: 'fa-user-plus'
+            },
+            { 
+                description: 'Обновление системы учета',
+                date: '5 апреля 2025 года',
+                icon: 'fa-cogs'
+            }
+        ];
+
+        // Данные для текущих лаборантов с аватарками и ролями
+        const currentLab = [
+            { 
+                name: 'Svyatoslav Travmatov', 
+                role: 'Head of LAB',
+                avatar: '/api/placeholder/300/300',
+                skills: ['Глава Лаборатории', 'Криминалистика']
+            },
+            { 
+                name: 'Mark Travmatov', 
+                role: 'D.Head of LAB',
+                avatar: '/api/placeholder/300/300',
+                skills: ['Зам.Главы Лаборатории', 'Криминалистика']
+            },
+            { 
+                name: 'Peto Berlusconi', 
+                role: 'Эксперт-Криминалист',
+                avatar: '/api/placeholder/300/300',
+                skills: ['Криминалистика', 'Следоведение']
+            },
+            { 
+                name: 'Vlad Disel', 
+                role: 'Мед.Эксперт',
+                avatar: '/api/placeholder/300/300',
+                skills: ['Мед.Эксперт', 'Следоведение']
+            }
+        ];
+
+        // Данные для экс-лаборантов
+        const exLab = [
+            { 
+                name: 'Hakushika Awayuki', 
+                role: 'Head of LAB',
+                avatar: 'https://i.pinimg.com/236x/e7/b8/1d/e7b81d2a95e609aeda8dc684ffd4c985.jpg',
+                skills: ['Глава Лаборатории', 'Криминалистика']
+            },
+            { 
+                name: 'Akane Sugamoto', 
+                role: 'Head of LAB',
+                avatar: '/api/placeholder/300/300',
+                skills: ['Глава Лаборатории', 'Криминалистика']
+            },
+            { 
+                name: 'Ethan Walsh', 
+                role: 'Эксперт-Криминалист',
+                avatar: '/api/placeholder/300/300',
+                skills: ['Криминалистика', 'Следоведение']
+            }
+        ];
+
+        // Функция для отображения истории изменений
+        const renderHistory = (filter = '') => {
+            const historyList = document.getElementById('history-list');
+            historyList.innerHTML = '';
+            
+            const filteredHistory = historyData.filter(item => 
+                item.description.toLowerCase().includes(filter.toLowerCase()) || 
+                item.date.toLowerCase().includes(filter.toLowerCase())
+            );
+            
+            if (filteredHistory.length === 0) {
+                historyList.innerHTML = '<div class="empty-message"><i class="fas fa-search"></i> Записи не найдены</div>';
+                return;
+            }
+            
+            filteredHistory.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.className = 'history-item';
+                
+                const description = document.createElement('div');
+                description.className = 'history-description';
+                description.innerHTML = `<i class="fas ${item.icon || 'fa-info-circle'}"></i> ${item.description}`;
+                
+                const date = document.createElement('div');
+                date.className = 'history-date';
+                date.innerHTML = `<i class="far fa-calendar-alt"></i> ${item.date}`;
+                
+                listItem.appendChild(description);
+                listItem.appendChild(date);
+                historyList.appendChild(listItem);
+            });
+        };
+
+        // Функция для отображения лаборантов
+        const renderLabList = (labList, elementId, filter = '') => {
+            const list = document.getElementById(elementId);
+            list.innerHTML = '';
+
+            const filteredList = labList.filter(lab => 
+                lab.name.toLowerCase().includes(filter.toLowerCase()) ||
+                lab.role.toLowerCase().includes(filter.toLowerCase())
+            );
+
+            if (filteredList.length === 0) {
+                list.innerHTML = '<div class="empty-message"><i class="fas fa-user-slash"></i> Лаборанты не найдены</div>';
+                return;
+            }
+
+            filteredList.forEach(lab => {
+                const listItem = document.createElement('li');
+
+                const labPersonDiv = document.createElement('div');
+                labPersonDiv.className = 'lab-person';
+
+                // Создаем элемент <img> для аватарки
+                const img = document.createElement('img');
+                img.src = lab.avatar;  // Плейсхолдер аватарки
+                img.alt = lab.name;
+                
+                // Информация о лаборанте
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'lab-person-info';
+                
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'lab-person-name';
+                nameSpan.textContent = lab.name;
+                
+                const roleSpan = document.createElement('span');
+                roleSpan.className = 'lab-person-role';
+                roleSpan.innerHTML = `<i class="fas fa-briefcase"></i> ${lab.role}`;
+                
+                infoDiv.appendChild(nameSpan);
+                infoDiv.appendChild(roleSpan);
+                
+                // Добавляем скиллы, если они есть
+                if (lab.skills && lab.skills.length > 0) {
+                    const skillsDiv = document.createElement('div');
+                    lab.skills.forEach(skill => {
+                        const skillTag = document.createElement('span');
+                        skillTag.className = 'skill-tag';
+                        skillTag.textContent = skill;
+                        skillsDiv.appendChild(skillTag);
+                    });
+                    infoDiv.appendChild(skillsDiv);
+                }
+
+                labPersonDiv.appendChild(img);
+                labPersonDiv.appendChild(infoDiv);
+
+                listItem.appendChild(labPersonDiv);
+
+                // Если это список текущих лаборантов, добавляем кнопку перевода в экс-лаборанты
+                if (elementId === 'current-lab') {
+                    const transferButton = document.createElement('button');
+                    transferButton.className = 'transfer-button';
+                    transferButton.innerHTML = '<i class="fas fa-exchange-alt"></i> В экс-лаборанты';
+                    transferButton.addEventListener('click', () => {
+                        transferLabPerson(lab.name);
+                    });
+                    listItem.appendChild(transferButton);
+                }
+
+                list.appendChild(listItem);
+            });
+
+            // Обновление счетчиков
+            if (elementId === 'current-lab') {
+                document.getElementById('current-count').textContent = filteredList.length;
+            } else if (elementId === 'ex-lab') {
+                document.getElementById('ex-count').textContent = filteredList.length;
+            }
+        };
+
+        // Функция для перевода лаборанта в экс-лаборанты
+        const transferLabPerson = (name) => {
+            // Перемещаем лаборанта из currentLab в exLab
+            const personIndex = currentLab.findIndex(lab => lab.name === name);
+            if (personIndex !== -1) {
+                const person = currentLab.splice(personIndex, 1)[0];
+                exLab.push(person);
+
+                // Добавляем запись в историю
+                // Добавляем запись в историю
+                historyData.unshift({
+                    description: `${name} переведен(а) в экс-лаборанты`,
+                    date: new Date().toLocaleDateString('ru-RU', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    }) + ' года',
+                    icon: 'fa-user-slash'
+                });
+
+                // Перерисовываем списки
+                renderLabList(currentLab, 'current-lab');
+                renderLabList(exLab, 'ex-lab');
+                renderHistory();
+            }
+        };
+
+        // Функция для добавления новой записи в историю
+        const addHistoryRecord = (description) => {
+            const newRecord = {
+                description: description,
+                date: new Date().toLocaleDateString('ru-RU', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                }) + ' года',
+                icon: 'fa-plus-circle'
+            };
+            
+            historyData.unshift(newRecord);
+            renderHistory();
+        };
+        
+        // Функция для добавления нового лаборанта
+        const addLabPerson = (name, role) => {
+            const newPerson = {
+                name: name,
+                role: role,
+                avatar: '/api/placeholder/300/300',
+                skills: ['Новый сотрудник']
+            };
+            
+            currentLab.push(newPerson);
+            
+            // Добавляем запись в историю
+            historyData.unshift({
+                description: `Добавлен новый лаборант ${name}`,
+                date: new Date().toLocaleDateString('ru-RU', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                }) + ' года',
+                icon: 'fa-user-plus'
+            });
+            
+            renderLabList(currentLab, 'current-lab');
+            renderHistory();
+        };
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHistory();
+            renderLabList(currentLab, 'current-lab');
+            renderLabList(exLab, 'ex-lab');
+            
+            // Функции для модальных окон
+            const historyModal = document.getElementById('history-modal');
+            const labModal = document.getElementById('lab-modal');
+            
+            // Открытие модального окна для добавления записи в историю
+            document.getElementById('add-history-btn').addEventListener('click', () => {
+                historyModal.style.display = 'block';
+            });
+            
+            // Закрытие модального окна для добавления записи в историю
+            document.getElementById('close-history-modal').addEventListener('click', () => {
+                historyModal.style.display = 'none';
+            });
+            
+            document.getElementById('cancel-history').addEventListener('click', () => {
+                historyModal.style.display = 'none';
+            });
+            
+            // Сохранение новой записи в историю
+            document.getElementById('save-history').addEventListener('click', () => {
+                const description = document.getElementById('history-description').value.trim();
+                if (description) {
+                    addHistoryRecord(description);
+                    document.getElementById('history-description').value = '';
+                    historyModal.style.display = 'none';
+                }
+            });
+            
+            // Открытие модального окна для добавления лаборанта
+            document.getElementById('add-current-lab-btn').addEventListener('click', () => {
+                labModal.style.display = 'block';
+            });
+            
+            // Закрытие модального окна для добавления лаборанта
+            document.getElementById('close-lab-modal').addEventListener('click', () => {
+                labModal.style.display = 'none';
+            });
+            
+            document.getElementById('cancel-lab').addEventListener('click', () => {
+                labModal.style.display = 'none';
+            });
+            
+            // Сохранение нового лаборанта
+            document.getElementById('save-lab').addEventListener('click', () => {
+                const name = document.getElementById('lab-name').value.trim();
+                const role = document.getElementById('lab-role').value.trim();
+                if (name && role) {
+                    addLabPerson(name, role);
+                    document.getElementById('lab-name').value = '';
+                    document.getElementById('lab-role').value = '';
+                    labModal.style.display = 'none';
+                }
+            });
+            
+            // Закрытие модальных окон при клике вне их области
+            window.addEventListener('click', (event) => {
+                if (event.target === historyModal) {
+                    historyModal.style.display = 'none';
+                }
+                if (event.target === labModal) {
+                    labModal.style.display = 'none';
+                }
+            });
+        });
+
+        // Поиск по истории изменений
+        document.getElementById('history-search').addEventListener('input', (e) => {
+            renderHistory(e.target.value);
+        });
+
+        // Поиск по текущим лаборантам
+        document.getElementById('current-lab-search').addEventListener('input', (e) => {
+            renderLabList(currentLab, 'current-lab', e.target.value);
+        });
+
+        // Поиск по экс-лаборантам
+        document.getElementById('ex-lab-search').addEventListener('input', (e) => {
+            renderLabList(exLab, 'ex-lab', e.target.value);
+        });
+
+        // Переключение между вкладками
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Функция для генерации случайного цвета для аватарки
+        const getRandomColor = () => {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        };
+        
+        // Функция для получения инициалов из полного имени
+        const getInitials = (name) => {
+            return name.split(' ').map(n => n[0]).join('');
+        };
+        
+        // Генерация случайных аватарок для лаборантов
+        const generateAvatars = () => {
+            // Генерируем аватарки для текущих лаборантов
+            currentLab.forEach((lab, index) => {
+                const avatarColor = getRandomColor();
+                lab.avatar = `/api/placeholder/300/300?text=${getInitials(lab.name)}&bg=${avatarColor.substring(1)}&fg=FFFFFF`;
+            });
+            
+            // Генерируем аватарки для экс-лаборантов
+            exLab.forEach((lab, index) => {
+                const avatarColor = getRandomColor();
+                lab.avatar = `/api/placeholder/300/300?text=${getInitials(lab.name)}&bg=${avatarColor.substring(1)}&fg=FFFFFF`;
+            });
+            
+            // Перерисовываем списки
+            renderLabList(currentLab, 'current-lab');
+            renderLabList(exLab, 'ex-lab');
+        };
+        
+        // Генерируем аватарки при загрузке страницы
+        generateAvatars();
+    </script>
+</body>
+</html>

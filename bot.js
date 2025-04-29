@@ -63,20 +63,19 @@ bot.onText(/\/send_request (.+)/, (msg, match) => {
 // Обработка команды /test Салам
 bot.onText(/\/test (.+)/, (msg, match) => {
     const chatId = msg.chat.id;
-    const userId = msg.from.id;  // Получаем userId пользователя
+    const userId = msg.from.id.toString(); // ID пользователя в виде строки
     const messageToSend = match[1];
 
-    // Проверка, является ли пользователь администратором
-    if (adminUserIds.includes(userId.toString())) {
-        const userName = msg.from.username ? `@${msg.from.username}` : 'Неизвестный'; // Получаем username
+    const userRole = users[userId];
 
-        // Формируем сообщение с username сначала, а потом текст
+    // Разрешённые роли
+    const allowedRoles = ['owner', 'admin', 'tech.admin', 'director'];
+
+    if (allowedRoles.includes(userRole)) {
+        const userName = msg.from.username ? `@${msg.from.username}` : 'Неизвестный';
         const formattedMessage = `Сообщение от администратора ${userName}\n\n${messageToSend}`;
-
-        // Отправляем сообщение в группу
         bot.sendMessage(groupChatId, formattedMessage);
     } else {
-        // Если пользователь не администратор, отправляем сообщение о запрете
         bot.sendMessage(chatId, 'У вас нет прав для выполнения этой команды.');
     }
 });

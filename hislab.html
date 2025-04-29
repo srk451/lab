@@ -41,26 +41,41 @@
         }
         
         header {
-            background: linear-gradient(135deg, var(--secondary-color), #34495e);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        header h1 {
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        header h1 i {
-            margin-right: 12px;
-            font-size: 1.8rem;
-        }
+    position: relative;
+    background: linear-gradient(135deg, var(--secondary-color), #34495e);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header h1 i {
+    margin-right: 12px;
+    font-size: 1.8rem;
+}
+
+/* Кнопка Назад */
+.back-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    color: #ccc;
+}
         
         h1, h2, h3 {
             color: var(--secondary-color);
@@ -530,7 +545,10 @@
     </style>
 </head>
 <body>
-    <header style="color: white;">
+    <header>
+        <a href="./lab.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Назад
+        </a>
         <h1><i class="fas fa-flask"></i> Система управления лаборантами</h1>
     </header>
     

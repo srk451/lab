@@ -65,6 +65,9 @@
         h1, h2, h3 {
             color: var(--secondary-color);
         }
+        header h1 {
+    color: white !important;
+}
         
         h1 {
             margin-top: 0;
@@ -527,7 +530,7 @@
     </style>
 </head>
 <body>
-    <header>
+    <header style="color: white;">
         <h1><i class="fas fa-flask"></i> Система управления лаборантами</h1>
     </header>
     
@@ -548,9 +551,6 @@
             <div class="card">
                 <div class="card-header">
                     <h2><i class="fas fa-clipboard-list"></i> История изменений</h2>
-                    <button class="add-button" id="add-history-btn">
-                        <i class="fas fa-plus"></i> Добавить запись
-                    </button>
                 </div>
                 <div class="search-wrapper">
                     <input type="text" class="search-box" id="history-search" placeholder="Поиск по истории изменений...">
@@ -573,9 +573,6 @@
                             <i class="fas fa-users"></i> <span id="current-count">0</span>
                         </span>
                     </h2>
-                    <button class="add-button" id="add-current-lab-btn">
-                        <i class="fas fa-user-plus"></i> Добавить лаборанта
-                    </button>
                 </div>
                 <div class="search-wrapper">
                     <input type="text" class="search-box" id="current-lab-search" placeholder="Поиск по текущим лаборантам...">
@@ -612,7 +609,6 @@
     <div id="history-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3><i class="fas fa-plus-circle"></i> Добавить запись в историю</h3>
                 <span class="close-modal" id="close-history-modal">&times;</span>
             </div>
             <div class="form-group">
@@ -630,7 +626,6 @@
     <div id="lab-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3><i class="fas fa-user-plus"></i> Добавить лаборанта</h3>
                 <span class="close-modal" id="close-lab-modal">&times;</span>
             </div>
             <div class="form-group">
@@ -651,36 +646,41 @@
     <script>
         // Данные для истории изменений
         const historyData = [
+        { 
+                description: 'Добавлен новый лаборант Mikhail Voronov',
+                date: '28 апреля 2025 года',
+                icon: 'fa-user-plus'
+            },
             { 
                 description: 'Обновлены профили всех лаборантов',
-                date: '27 апреля 2025 года',
+                date: '28 апреля 2025 года',
                 icon: 'fa-refresh'
             },
             { 
                 description: 'Добавлено новое изменение',
-                date: '25 апреля 2025 года',
+                date: '28 апреля 2025 года',
                 icon: 'fa-plus'
-            },
-            { 
-                description: 'Обновление данных лаборанта Петровой М.А.',
-                date: '20 апреля 2025 года',
-                icon: 'fa-user-edit'
-            },
-            { 
-                description: 'Кузнецова Ирина переведена в экс-лаборанты',
-                date: '15 апреля 2025 года',
-                icon: 'fa-user-slash'
-            },
-            { 
-                description: 'Добавлен новый лаборант Петрова Мария',
-                date: '10 апреля 2025 года',
-                icon: 'fa-user-plus'
-            },
-            { 
-                description: 'Обновление системы учета',
-                date: '5 апреля 2025 года',
-                icon: 'fa-cogs'
             }
+            // { 
+            //     description: 'Обновление данных лаборанта Петровой М.А.',
+            //     date: '20 апреля 2025 года',
+            //     icon: 'fa-user-edit'
+            // },
+            // { 
+            //     description: 'Кузнецова Ирина переведена в экс-лаборанты',
+            //     date: '15 апреля 2025 года',
+            //     icon: 'fa-user-slash'
+            // },
+            // { 
+            //     description: 'Добавлен новый лаборант Петрова Мария',
+            //     date: '10 апреля 2025 года',
+            //     icon: 'fa-user-plus'
+            // },
+            // { 
+            //     description: 'Обновление системы учета',
+            //     date: '5 апреля 2025 года',
+            //     icon: 'fa-cogs'
+            // }
         ];
 
         // Данные для текущих лаборантов с аватарками и ролями
@@ -688,25 +688,31 @@
             { 
                 name: 'Svyatoslav Travmatov', 
                 role: 'Head of LAB',
-                avatar: '/api/placeholder/300/300',
+                avatar: 'images/leonardo_cavalli.png',
                 skills: ['Глава Лаборатории', 'Криминалистика']
             },
             { 
                 name: 'Mark Travmatov', 
                 role: 'D.Head of LAB',
-                avatar: '/api/placeholder/300/300',
+                avatar: 'images/sakura_riley.png',
                 skills: ['Зам.Главы Лаборатории', 'Криминалистика']
             },
             { 
                 name: 'Peto Berlusconi', 
                 role: 'Эксперт-Криминалист',
-                avatar: '/api/placeholder/300/300',
+                avatar: 'images/peto_berlusconi.png',
+                skills: ['Криминалистика', 'Следоведение']
+            },
+            { 
+                name: 'Mikhail Voronov', 
+                role: 'Эксперт-Криминалист',
+                avatar: 'images/mikhail_voronov.png',
                 skills: ['Криминалистика', 'Следоведение']
             },
             { 
                 name: 'Vlad Disel', 
                 role: 'Мед.Эксперт',
-                avatar: '/api/placeholder/300/300',
+                avatar: 'images/vlad_disel.png',
                 skills: ['Мед.Эксперт', 'Следоведение']
             }
         ];
@@ -716,19 +722,19 @@
             { 
                 name: 'Hakushika Awayuki', 
                 role: 'Head of LAB',
-                avatar: 'https://i.pinimg.com/236x/e7/b8/1d/e7b81d2a95e609aeda8dc684ffd4c985.jpg',
+                avatar: 'images/hakushika_awayuki.png',
                 skills: ['Глава Лаборатории', 'Криминалистика']
             },
             { 
                 name: 'Akane Sugamoto', 
                 role: 'Head of LAB',
-                avatar: '/api/placeholder/300/300',
+                avatar: 'images/akane_sugamoto.png',
                 skills: ['Глава Лаборатории', 'Криминалистика']
             },
             { 
                 name: 'Ethan Walsh', 
                 role: 'Эксперт-Криминалист',
-                avatar: '/api/placeholder/300/300',
+                avatar: 'images/ethan_walsh.png',
                 skills: ['Криминалистика', 'Следоведение']
             }
         ];
@@ -791,6 +797,7 @@
                 const img = document.createElement('img');
                 img.src = lab.avatar;  // Плейсхолдер аватарки
                 img.alt = lab.name;
+                img.className = 'avatar-image'; // <--- добавил!
                 
                 // Информация о лаборанте
                 const infoDiv = document.createElement('div');
@@ -827,12 +834,9 @@
                 // Если это список текущих лаборантов, добавляем кнопку перевода в экс-лаборанты
                 if (elementId === 'current-lab') {
                     const transferButton = document.createElement('button');
-                    transferButton.className = 'transfer-button';
-                    transferButton.innerHTML = '<i class="fas fa-exchange-alt"></i> В экс-лаборанты';
                     transferButton.addEventListener('click', () => {
                         transferLabPerson(lab.name);
                     });
-                    listItem.appendChild(transferButton);
                 }
 
                 list.appendChild(listItem);
@@ -1031,19 +1035,20 @@
             return name.split(' ').map(n => n[0]).join('');
         };
         
-        // Генерация случайных аватарок для лаборантов
         const generateAvatars = () => {
-            // Генерируем аватарки для текущих лаборантов
-            currentLab.forEach((lab, index) => {
-                const avatarColor = getRandomColor();
-                lab.avatar = `/api/placeholder/300/300?text=${getInitials(lab.name)}&bg=${avatarColor.substring(1)}&fg=FFFFFF`;
-            });
-            
-            // Генерируем аватарки для экс-лаборантов
-            exLab.forEach((lab, index) => {
-                const avatarColor = getRandomColor();
-                lab.avatar = `/api/placeholder/300/300?text=${getInitials(lab.name)}&bg=${avatarColor.substring(1)}&fg=FFFFFF`;
-            });
+    currentLab.forEach((lab) => {
+        if (!lab.avatar) {
+            const avatarColor = getRandomColor();
+            lab.avatar = `/api/placeholder/300/300?text=${getInitials(lab.name)}&bg=${avatarColor.substring(1)}&fg=FFFFFF`;
+        }
+    });
+
+    exLab.forEach((lab) => {
+        if (!lab.avatar) {
+            const avatarColor = getRandomColor();
+            lab.avatar = `/api/placeholder/300/300?text=${getInitials(lab.name)}&bg=${avatarColor.substring(1)}&fg=FFFFFF`;
+        }
+    });
             
             // Перерисовываем списки
             renderLabList(currentLab, 'current-lab');

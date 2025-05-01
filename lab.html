@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Лаборатория ФБР | ADV-RP</title>
+    <link rel="icon" href="images/laboratory.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
@@ -1491,6 +1492,7 @@ body.dark-mode .update-link:after {
     }
 }
 
+
     </style>
 </head>
 <body>
@@ -1532,7 +1534,7 @@ body.dark-mode .update-link:after {
                 <li><a href="#links"><i class="fas fa-link"></i> Ссылки</a></li>
                 <li><a href="#contact"><i class="fas fa-envelope"></i> Контакты</a></li>
                 <li><a href="./hislab.html"><i class="fas fa-cogs"></i> История изм.</a></li>
-                <li><a href="#" id="loginBtn">Войти</a></li>
+                <li><a href="#" id="loginBtn" class="auth-btn">Войти</a></li>
             </ul>
         </div>
     </nav>
@@ -1752,10 +1754,10 @@ body.dark-mode .update-link:after {
             <div class="tab-content active" id="structure">
                 <h3>РУКОВОДСТВО ЛАБОРАТОРИИ, СПИСОК ДОЛЖНОСТЕЙ:</h3>
                 <ol class="regulations-list">
-                    <li>АДМИНИСТРАТОР ЛАБОРАТОРИИ — руководитель подразделения, отвечающий за все аспекты работы лаборатории</li>
-                    <li>ЗАМЕСТИТЕЛЬ АДМИНИСТРАТОРА ЛАБОРАТОРИИ — помощник руководителя, имеющий все полномочия руководителя в его отсутствие</li>
-                    <li>КУРАТОР ЛАБОРАТОРИИ — специалист, отвечающий за обучение новых сотрудников и контроль качества экспертиз</li>
-                    <li>КРИМИНАЛИСТЫ/МЕД.ЭКСПЕРТЫ — специалисты, осуществляющие экспертизы по своему профилю</li>
+                    <li>АДМИНИСТРАТОР ЛАБОРАТОРИИ — руководитель подразделения, отвечающий за все аспекты работы лаборатории.</li>
+                    <li>ЗАМЕСТИТЕЛЬ АДМИНИСТРАТОРА ЛАБОРАТОРИИ — помощник руководителя, имеющий все полномочия руководителя в его отсутствие.</li>
+                    <li>КУРАТОР ЛАБОРАТОРИИ — специалист, отвечающий за обучение новых сотрудников и контроль качества экспертиз.</li>
+                    <li>КРИМИНАЛИСТЫ/МЕД.ЭКСПЕРТЫ — специалисты, осуществляющие экспертизы по своему профилю.</li>
                 </ol>
             </div>
             
@@ -1774,11 +1776,11 @@ body.dark-mode .update-link:after {
                 
                 <h3>Общие правила для сотрудников:</h3>
                 <ol class="regulations-list">
-                    <li>Соблюдать высокие стандарты профессиональной этики</li>
-                    <li>Постоянно совершенствовать профессиональные навыки</li>
-                    <li>Обеспечивать объективность и беспристрастность при проведении экспертиз</li>
-                    <li>Не разглашать информацию о проводимых расследованиях</li>
-                    <li>Подчиняться указаниям руководства лаборатории</li>
+                    <li>Соблюдать высокие стандарты профессиональной этики.</li>
+                    <li>Постоянно совершенствовать профессиональные навыки.</li>
+                    <li>Обеспечивать объективность и беспристрастность при проведении экспертиз.</li>
+                    <li>Не разглашать информацию о проводимых расследованиях.</li>
+                    <li>Подчиняться указаниям руководства лаборатории.</li>
                 </ol>
             </div>
             
@@ -1921,7 +1923,26 @@ body.dark-mode .update-link:after {
                         <div class="update-content">
                             <h3>Назначение нового эксперта-криминалиста лаборатории</h3>
                             <p>Поздравляем Пето Берлускони с назначением на должность эксперта-криминалиста в нашу лабораторию. Уверены, что его опыт и профессионализм окажут значительное влияние на дальнейшее развитие нашей команды.</p>
-                            <a href="#news" class="update-link">Читать больше</a>
+                            <a href="#" class="update-link" onclick="toggleDetails(event, this)">Читать больше</a>
+
+<div id="news-details" style="display: none; margin-top: 10px;">
+    <p>Пето Берлускони обладает большим опытом в области криминалистики. Он является бывшим руководителем лаборатории и имеет высокую квалификацию в проведении экспертиз.</p>
+</div>
+
+<script>
+function toggleDetails(event, link) {
+    event.preventDefault(); // отменяем переход по ссылке!
+
+    var details = document.getElementById('news-details');
+    if (details.style.display === 'none') {
+        details.style.display = 'block';
+        link.innerText = 'Скрыть';
+    } else {
+        details.style.display = 'none';
+        link.innerText = 'Читать больше';
+    }
+}
+</script>
                         </div>
                     </div>
                     <!-- Добавьте другие новости по аналогии -->

@@ -253,7 +253,6 @@
             margin-right: 5px;
         }
 
-        /* Modal */
         #loginModal {
             display: none;
             position: fixed;
@@ -327,7 +326,6 @@
             100% { opacity: 0.4; }
         }
 
-        /* Responsive design */
         @media only screen and (max-width: 768px) {
             .login-container {
                 max-width: 95%;
@@ -407,7 +405,6 @@
     <p>Несанкционированный доступ к данной системе запрещен и преследуется по закону.</p>
 </div>
 
-<!-- Модальное окно для "Забыли пароль" -->
 <div id="loginModal">
     <div class="modal-content">
         <div class="modal-header">
@@ -448,7 +445,6 @@
 </div>
 
 <script>
-    // Объект с пользователями (для демонстрации)
     const users = {
     "YWRtaW5jYXZhbGxp": { password: "Y2F2aGxhYnRvcA==", role: "admin" },
     "RmVkZXJhbCBCdXJlYXUgb2YgSW52ZXN0aWdhdGlvbg==": { password: "RkJJdGVzdA==", role: "user" },
@@ -460,7 +456,6 @@
 };
 
 
-    // Обработка формы входа
     document.getElementById('loginForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -469,36 +464,30 @@
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value.trim();
         
-        // Анимация кнопки при нажатии
         const loginBtn = document.querySelector('.login-btn');
         loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Проверка...';
         loginBtn.disabled = true;
         
-        // Имитация задержки проверки
         setTimeout(() => {
-            // Кодирование введенных данных в base64
             const encodedUsername = btoa(username);
             const encodedPassword = btoa(password);
             
-            // Проверка на совпадение с данными в объекте "users"
             if (users[encodedUsername] && users[encodedUsername].password === encodedPassword) {
                 sessionStorage.setItem('loggedIn', 'true');
-                // Анимация успешного входа
                 loginBtn.innerHTML = '<i class="fas fa-check"></i> Доступ разрешен';
                 loginBtn.style.backgroundColor = 'var(--success-color)';
                 
-                // Переход в зависимости от роли пользователя
                 const userRole = users[encodedUsername].role;
                 
                 setTimeout(() => {
                     if (userRole === 'owner') {
-                        window.location.href = './lab.html';  // Для владельца
+                        window.location.href = './lab.html';  
                     } else if (userRole === 'admin') {
-                        window.location.href = './lab.html';  // Для администратора
+                        window.location.href = './lab.html'; 
                     } else if (userRole === 'laborant') {
-                        window.location.href = './lab.html';  // Для 
+                        window.location.href = './lab.html';
                     } else if (userRole === 'user') {
-                        window.location.href = './lab.html';  // Для обычного пользователя
+                        window.location.href = './lab.html';
                     } else {
                         errorText.textContent = 'Роль не определена';
                         errorMessage.style.display = 'flex';
@@ -506,21 +495,17 @@
                     }
                 }, 1000);
             } else {
-                // Анимация неудачного входа
                 loginBtn.innerHTML = '<i class="fas fa-times"></i> Доступ запрещен';
                 loginBtn.style.backgroundColor = 'var(--error-color)';
                 
-                // Показ сообщения об ошибке
                 errorText.textContent = 'Неверный логин или пароль';
                 errorMessage.style.display = 'flex';
                 
-                // Сброс кнопки через 2 секунды
                 setTimeout(resetLoginButton, 2000);
             }
         }, 1500);
     });
     
-    // Функция сброса кнопки входа
     function resetLoginButton() {
         const loginBtn = document.querySelector('.login-btn');
         loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Авторизация в системе';
@@ -528,7 +513,6 @@
         loginBtn.disabled = false;
     }
     
-    // Модальное окно восстановления пароля
     const modal = document.getElementById('loginModal');
     const forgotPasswordLink = document.getElementById('forgotPasswordLink');
     const closeModal = document.getElementById('closeModal');
@@ -548,7 +532,6 @@
         }
     };
     
-    // Форма восстановления пароля
 document.getElementById('resetForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -562,20 +545,18 @@ document.getElementById('resetForm').addEventListener('submit', function(e) {
 
     const message = `Пользователь оставил запрос:\nИдентификационный номер сотрудника: ${employeeId}\nСлужебный Email: ${email}\nСпособ связи: ${contactMethod}`;
 
-    // Отправка сообщения первому администратору
     fetch('https://api.telegram.org/bot7268248925:AAHmWrNJvOWIsq1SroDGX_Awro7pWDHWcuI/sendMessage', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            chat_id: '6924074231',  // ID первого администратора
+            chat_id: '6924074231', 
             text: message
         })
     })
     .then(response => response.json())
     .then(data => {
-        // Отправка сообщения второму администратору
         if (data.ok) {
             return fetch('https://api.telegram.org/bot7268248925:AAHmWrNJvOWIsq1SroDGX_Awro7pWDHWcuI/sendMessage', {
                 method: 'POST',
@@ -583,7 +564,7 @@ document.getElementById('resetForm').addEventListener('submit', function(e) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    chat_id: '996317285',  // ID второго администратора
+                    chat_id: '996317285',
                     text: message
                 })
             });
@@ -618,7 +599,6 @@ document.getElementById('resetForm').addEventListener('submit', function(e) {
 });
 
     
-    // Добавление визуальных эффектов для полей ввода
     const inputs = document.querySelectorAll('input');
     inputs.forEach(input => {
         input.addEventListener('focus', function() {

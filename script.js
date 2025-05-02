@@ -44,6 +44,7 @@ document.getElementById('loginForm').onsubmit = function (e) {
         const role = users[encodedUsername].role;
         sessionStorage.setItem('isLoggedIn', 'true');
         sessionStorage.setItem('role', role);
+        sessionStorage.setItem('username', username); // 👈 добавлено
 
         checkUserRole(); // 👈 ВАЖНО: вызываем после входа
 

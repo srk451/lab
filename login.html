@@ -453,6 +453,9 @@
     "YWRtaW5jYXZhbGxp": { password: "Y2F2aGxhYnRvcA==", role: "admin" },
     "RmVkZXJhbCBCdXJlYXUgb2YgSW52ZXN0aWdhdGlvbg==": { password: "RkJJdGVzdA==", role: "user" },
     "c3Jr": { password: "c2lzZW1iYWV2", role: "owner" },
+    "bGFidmxhZGRpc2VsbGFi": { password: "ZGlzZWxsYWJvcmFudHRvcA==", role: "laborant" },
+    "bGFicGV0b2Jlcmx1c2xhYg==": { password: "bGFib3JhbnRwZXRvdG9w", role: "laborant" },
+    "bGFibGFibWlzaGF2b3Jvbm92": { password: "bGFib3JhbnRtaXNoYWxhYnhk", role: "laborant" },
     "TGFib3JhdG9yeQ==": { password: "TEFCVEVTVA==", role: "user" }
 };
 
@@ -492,6 +495,8 @@
                         window.location.href = './lab.html';  // Для владельца
                     } else if (userRole === 'admin') {
                         window.location.href = './lab.html';  // Для администратора
+                    } else if (userRole === 'laborant') {
+                        window.location.href = './lab.html';  // Для 
                     } else if (userRole === 'user') {
                         window.location.href = './lab.html';  // Для обычного пользователя
                     } else {

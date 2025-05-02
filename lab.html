@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
-       // Проверка на авторизацию через sessionStorage
        if (!sessionStorage.getItem('loggedIn')) {
     window.location.href = './login.html';
 }
@@ -949,7 +948,6 @@
             }
         }
         
-        /* Модальное окно для галереи */
         .modal {
             display: none;
             position: fixed;
@@ -969,7 +967,6 @@
             max-height: 80%;
         }
         
-        /* Стили для кнопки связаться */
         .contact-form {
             display: none;
             margin-top: 20px;
@@ -1051,7 +1048,6 @@
             cursor: pointer;
         }
 
-        /* Табы для регламента */
         .tabs {
             display: flex;
             border-bottom: 1px solid var(--border-color);
@@ -1082,7 +1078,6 @@
             animation: fadeIn 0.5s;
         }
 
-        /* Прогресс-бар для прокрутки страницы */
         .progress-container {
             position: fixed;
             top: 0;
@@ -1098,12 +1093,10 @@
             width: 0%;
         }
 
-        /* Анимированные числа */
         .animated-number {
             transition: all 0.5s;
         }
 
-        /* Прелоадер */
         .preloader {
             position: fixed;
             top: 0;
@@ -1157,7 +1150,6 @@
             }
         }
 
-        /* Стили для секции обновлений */
 .updates-section {
     padding: 60px 0;
     background-color: #f6f8fb;
@@ -1269,7 +1261,6 @@
     width: 100%;
 }
 
-/* Адаптивный дизайн для секции обновлений */
 @media (max-width: 768px) {
     .update-item {
         flex-direction: column;
@@ -1285,7 +1276,6 @@
     }
 }
 
-/* Поддержка темного режима */
 body.dark-mode .updates-section {
     background-color: #121212;
 }
@@ -1315,7 +1305,6 @@ body.dark-mode .update-link:after {
     background-color: #4f9dff;
 }
 
-/* Стили для модального окна авторизации */
 .modal {
     display: none;
     position: fixed;
@@ -1445,7 +1434,6 @@ body.dark-mode .update-link:after {
     box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
 }
 
-/* Добавление иконок (требуется Font Awesome) */
 #loginForm label[for="username"]:before {
     content: "\f007";
     font-family: "Font Awesome 5 Free";
@@ -1461,7 +1449,6 @@ body.dark-mode .update-link:after {
     color: #3498db;
 }
 
-/* Стиль для сообщения об ошибке */
 .error-message {
     color: #e74c3c;
     font-size: 0.9rem;
@@ -1471,7 +1458,6 @@ body.dark-mode .update-link:after {
     display: none;
 }
 
-/* Адаптивность для мобильных устройств */
 @media (max-width: 576px) {
     .modal-content {
         margin: 20% auto;
@@ -1496,12 +1482,10 @@ body.dark-mode .update-link:after {
     </style>
 </head>
 <body>
-    <!-- Прелоадер -->
     <div class="preloader">
         <div class="loader"></div>
     </div>
 
-    <!-- Прогресс-бар прокрутки страницы -->
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
@@ -1540,7 +1524,6 @@ body.dark-mode .update-link:after {
         </div>
     </nav>
 
-    <!-- Модальное окно для входа -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
@@ -1560,7 +1543,6 @@ body.dark-mode .update-link:after {
 
     <script src="script.js"></script>
     
-    <!-- Hero Section -->
     <section class="hero-section" id="home">
         <div class="hero-content">
             <h1 class="hero-title fade-in">Лаборатория Федерального Бюро Расследований</h1>
@@ -1570,7 +1552,6 @@ body.dark-mode .update-link:after {
     </section>
     
     <main class="container">
-        <!-- About Section -->
         <section id="about" class="section fade-in">
             <div class="section-header">
                 <div class="section-icon">
@@ -1585,7 +1566,7 @@ body.dark-mode .update-link:after {
                     <div class="stat-icon">
                         <i class="fas fa-fingerprint"></i>
                     </div>
-                    <div class="stat-number animated-number" data-count="39">0</div>
+                    <div class="stat-number animated-number" data-count=48">0</div>
                     <div class="stat-label">Завершённых экспертиз</div>
                 </div>
                 
@@ -1650,7 +1631,6 @@ body.dark-mode .update-link:after {
             </div>
         </section>
         
-        <!-- Staff Section -->
         <section id="staff" class="section fade-in">
             <div class="section-header">
                 <div class="section-icon">
@@ -1740,7 +1720,6 @@ body.dark-mode .update-link:after {
             </div>
         </section>
         
-        <!-- Regulations Section -->
         <section id="regulations" class="section fade-in">
             <div class="section-header">
                 <div class="section-icon">
@@ -1812,7 +1791,6 @@ body.dark-mode .update-link:after {
             </div>
         </section>
         
-        <!-- Gallery Section -->
         <section id="gallery" class="section fade-in">
             <div class="section-header">
                 <div class="section-icon">
@@ -1854,7 +1832,6 @@ body.dark-mode .update-link:after {
             </div>
         </section>
         
-        <!-- Links Section -->
         <section id="links" class="section fade-in">
             <div class="section-header">
                 <div class="section-icon">
@@ -1874,29 +1851,29 @@ body.dark-mode .update-link:after {
                 <i class="fas fa-chevron-right"></i>
             </a>
             
-            <a href="#" class="link-card fade-in delay-2">
+            <a href="https://forms.gle/fxGVACtKhafN6rvt5" target="_blank" class="link-card fade-in delay-2">
                 <div class="link-icon">
                     <i class="fas fa-clipboard-list"></i>
                 </div>
                 <div class="link-text">
-                    <div class="link-title">Форма запроса экспертизы</div>
-                    <div class="link-desc">Оформление официального запроса на проведение экспертизы</div>
+                    <div class="link-title">Форма подачи запроса на экспертизу</div>
+                    <div class="link-desc">Официальное оформление обращения для проведения экспертизы</div>
                 </div>
                 <i class="fas fa-chevron-right"></i>
             </a>
             
-            <a href="#" class="link-card fade-in delay-3">
+            <a href="https://docs.google.com/spreadsheets/d/15Qa-GYfUvZcd2-WcQxz6XRFbgyyR3XmkRvEVEAZXJBE/edit?usp=sharing" target="_blank" class="link-card fade-in delay-3">
                 <div class="link-icon">
                     <i class="fas fa-book-open"></i>
                 </div>
                 <div class="link-text">
-                    <div class="link-title">Методические материалы</div>
-                    <div class="link-desc">Информация о стандартных процедурах и методиках проведения экспертиз</div>
+                    <div class="link-title">Итоги экспертиз</div>
+                    <div class="link-desc">Просмотр результатов и заключений по завершённым экспертизам</div>
                 </div>
                 <i class="fas fa-chevron-right"></i>
             </a>
             
-            <a href="#" class="link-card fade-in delay-4">
+            <!-- <a href="#" class="link-card fade-in delay-4">
                 <div class="link-icon">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
@@ -1905,23 +1882,21 @@ body.dark-mode .update-link:after {
                     <div class="link-desc">Материалы для подготовки новых сотрудников и повышения квалификации</div>
                 </div>
                 <i class="fas fa-chevron-right"></i>
-            </a>
+            </a> -->
         </section>
 
         <section id="updates" class="updates-section">
             <div class="container">
                 <h2 class="section-title">Обновления и изменения в составе</h2>
                 <div class="updates-list">
-                    <!-- Новость 1 -->
                     <div class="update-item">
-                        <div class="update-date">27 апреля 2025</div>
+                        <div class="update-date">2 мая 2025</div>
                         <div class="update-content">
                             <h3>Новая вакансия: Криминалист</h3>
                             <p>Мы ищем опытного криминалиста для работы в Лаборатории ФБР. Присоединяйтесь к нашей команде, если у вас есть опыт работы в судебной экспертизе и криминалистическом анализе.</p>
                             <a href="#apply" class="update-link">Подать заявку</a>
                         </div>
                     </div>
-                    <!-- Новость 2 -->
                     <div class="update-item">
                         <div class="update-date">27 апреля 2025</div>
                         <div class="update-content">
@@ -1935,7 +1910,7 @@ body.dark-mode .update-link:after {
 
 <script>
 function toggleDetails(event, link) {
-    event.preventDefault(); // отменяем переход по ссылке!
+    event.preventDefault();
 
     var details = document.getElementById('news-details');
     if (details.style.display === 'none') {
@@ -1949,12 +1924,10 @@ function toggleDetails(event, link) {
 </script>
                         </div>
                     </div>
-                    <!-- Добавьте другие новости по аналогии -->
                 </div>
             </div>
         </section>        
         
-        <!-- Contact Section -->
         <section id="contact" class="section fade-in">
             <div class="section-header">
                 <div class="section-icon">
@@ -1977,13 +1950,11 @@ function toggleDetails(event, link) {
         </section>
     </main>
     
-    <!-- Галерея модальное окно -->
     <div id="galleryModal" class="modal">
         <!-- <span class="close">&times;</span> -->
         <img class="modal-content" id="modalImage">
     </div>
     
-    <!-- Уведомление об успешной отправке -->
     <div class="notification" id="notification">
         <div class="notification-icon">
             <i class="fas fa-check-circle"></i>
@@ -2038,7 +2009,7 @@ function toggleDetails(event, link) {
             </div>
             
             <div class="footer-copyright">
-                © Лаборатория ФБР ADV-RP, 2025. Последнее обновление: 01.05.2025 | Mark Travmatov.
+                © Лаборатория ФБР ADV-RP, 2025. Последнее обновление: 02.05.2025 | Mark Travmatov.
             </div>
         </div>
     </footer>
@@ -2049,12 +2020,10 @@ function toggleDetails(event, link) {
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Прелоадер
             setTimeout(function() {
                 document.querySelector('.preloader').classList.add('fade-out');
             }, 1500);
             
-            // Навигация - активный пункт меню
             const navLinks = document.querySelectorAll('.nav-links a');
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
@@ -2063,15 +2032,12 @@ function toggleDetails(event, link) {
                 });
             });
             
-            // Прокрутка страницы - прогресс-бар
             window.onscroll = function() {
-                // Прогресс-бар
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrolled = (winScroll / height) * 100;
                 document.getElementById("progressBar").style.width = scrolled + "%";
                 
-                // Кнопка "Наверх"
                 const backToTop = document.getElementById('backToTop');
                 if (winScroll > 300) {
                     backToTop.classList.add('visible');
@@ -2079,28 +2045,23 @@ function toggleDetails(event, link) {
                     backToTop.classList.remove('visible');
                 }
                 
-                // Анимация чисел при прокрутке
 const statNumbers = document.querySelectorAll('.animated-number');
 
 statNumbers.forEach(number => {
-    // Проверяем, анимировалось ли уже число
     if (!number.classList.contains('animated')) {
         const position = number.getBoundingClientRect().top;
         const screenPosition = window.innerHeight / 1.3;
         
         if (position < screenPosition) {
-            // Запускаем анимацию только один раз
             const count = parseInt(number.getAttribute('data-count'), 10);
             animateNumber(number, 0, count, 2000);
             
-            // Помечаем, что число анимировано
             number.classList.add('animated');
         }
                     }
                 });
             };
             
-            // Анимация чисел
             function animateNumber(element, start, end, duration) {
                 if (start === end) return;
                 const range = end - start;
@@ -2117,7 +2078,6 @@ statNumbers.forEach(number => {
                 }, stepTime);
             }
             
-            // Кнопка "Наверх"
             document.getElementById('backToTop').addEventListener('click', function() {
                 window.scrollTo({
                     top: 0,
@@ -2125,33 +2085,28 @@ statNumbers.forEach(number => {
                 });
             });
             
-            // Галерея - модальное окно
             const galleryItems = document.querySelectorAll('.gallery-item');
     const modal = document.getElementById('galleryModal');
     const modalImg = document.getElementById('modalImage');
-    const closeBtn = document.querySelector('.close'); // Кнопка закрытия
+    const closeBtn = document.querySelector('.close');
 
-    // Открытие модального окна при клике на изображение
     galleryItems.forEach(item => {
         item.addEventListener('click', function() {
-            modal.style.display = "block";  // Показываем модальное окно
-            modalImg.src = this.querySelector('img').src; // Устанавливаем источник изображения
+            modal.style.display = "block";  
+            modalImg.src = this.querySelector('img').src;
         });
     });
 
-    // Закрытие модального окна при клике на крестик
     closeBtn.addEventListener('click', function() {
-        modal.style.display = "none";  // Скрываем модальное окно
+        modal.style.display = "none"; 
     });
 
-    // Закрытие модального окна при клике вне изображения (на фоне)
     window.addEventListener('click', function(event) {
         if (event.target === modal) {
-            modal.style.display = "none";  // Если клик по области модального окна, скрыть его
+            modal.style.display = "none";
         }
             });
             
-            // Форма контактов
             document.getElementById('showContactForm').addEventListener('click', function() {
                 const contactForm = document.getElementById('contactForm');
                 if (contactForm.style.display === "block") {
@@ -2161,20 +2116,16 @@ statNumbers.forEach(number => {
                 }
             });
             
-            // Отправка сообщения
             document.getElementById('sendMessage').addEventListener('click', function() {
                 const notification = document.getElementById('notification');
                 notification.classList.add('show');
                 
-                // Сброс формы
                 document.querySelectorAll('.form-input, .form-textarea').forEach(input => {
                     input.value = '';
                 });
                 
-                // Скрыть форму
                 document.getElementById('contactForm').style.display = "none";
                 
-                // Скрыть уведомление через 3 секунды
                 setTimeout(function() {
                     notification.classList.remove('show');
                 }, 3000);
@@ -2184,7 +2135,6 @@ statNumbers.forEach(number => {
                 document.getElementById('notification').classList.remove('show');
             });
             
-            // Темная тема
             const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
         
@@ -2200,7 +2150,6 @@ statNumbers.forEach(number => {
             }
             });
             
-            // Табы для регламента
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
@@ -2219,7 +2168,6 @@ statNumbers.forEach(number => {
                 });
             });
             
-            // Эффект появления элементов при прокрутке
             const fadeElements = document.querySelectorAll('.fade-in');
             
             const fadeInObserver = new IntersectionObserver((entries) => {
@@ -2239,7 +2187,6 @@ statNumbers.forEach(number => {
                 element.style.transform = 'translateY(20px)';
                 element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                 
-                // Добавляем задержку на основе классов delay-*
                 if (element.classList.contains('delay-1')) {
                     element.style.transitionDelay = '0.1s';
                 } else if (element.classList.contains('delay-2')) {
@@ -2261,14 +2208,11 @@ statNumbers.forEach(number => {
     
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
-                    // Убираем активные классы
                     tabs.forEach(t => t.classList.remove('active'));
                     contents.forEach(c => c.classList.remove('active'));
     
-                    // Делаем активной нажатую вкладку
                     tab.classList.add('active');
     
-                    // И контент, который связан с этой вкладкой
                     const id = tab.getAttribute('data-tab');
                     document.getElementById(id).classList.add('active');
                 });
@@ -2278,34 +2222,27 @@ statNumbers.forEach(number => {
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Обработка вкладок
         const tabs = document.querySelectorAll('.tab');
         const contents = document.querySelectorAll('.tab-content');
     
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                // Убираем активные классы
                 tabs.forEach(t => t.classList.remove('active'));
                 contents.forEach(c => c.classList.remove('active'));
     
-                // Делаем активной нажатую вкладку
                 tab.classList.add('active');
     
-                // И контент, который связан с этой вкладкой
                 const id = tab.getAttribute('data-tab');
                 document.getElementById(id).classList.add('active');
             });
         });
 
-        // Темная тема
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
         
         themeToggle.addEventListener('click', () => {
-            // Переключаем класс dark-mode для body
             document.body.classList.toggle('dark-mode');
 
-            // Обновляем иконку в зависимости от состояния
             if (document.body.classList.contains('dark-mode')) {
                 themeIcon.classList.remove('fa-moon');
                 themeIcon.classList.add('fa-sun');

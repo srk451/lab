@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Система управления лаборантами</title>
-    <!-- Добавление Font Awesome для иконок -->
     <link rel="icon" href="images/laboratory.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <script>
-        // Проверка на авторизацию через sessionStorage
         if (!sessionStorage.getItem('loggedIn')) {
      window.location.href = './login.html';
  }
@@ -64,7 +62,6 @@ header h1 i {
     font-size: 1.8rem;
 }
 
-/* Кнопка Назад */
 .back-button {
     position: absolute;
     top: 1rem;
@@ -395,7 +392,6 @@ header h1 i {
             margin-right: 5px;
         }
         
-        /* Добавляем модальное окно для добавления записей */
         .modal {
             display: none;
             position: fixed;
@@ -509,7 +505,6 @@ header h1 i {
             background-color: #d0d0d0;
         }
         
-        /* Адаптивность для мобильных устройств */
         @media (max-width: 768px) {
             .tab-button {
                 padding: 10px 15px;
@@ -577,7 +572,6 @@ header h1 i {
                 </div>
                 <div id="history">
                     <ul id="history-list">
-                        <!-- История изменений будет динамически добавляться с помощью JS -->
                     </ul>
                 </div>
             </div>
@@ -598,7 +592,6 @@ header h1 i {
                     <i class="fas fa-search"></i>
                 </div>
                 <ul id="current-lab">
-                    <!-- Текущие лаборанты -->
                 </ul>
             </div>
         </div>
@@ -618,13 +611,11 @@ header h1 i {
                     <i class="fas fa-search"></i>
                 </div>
                 <ul id="ex-lab">
-                    <!-- Экс-лаборанты -->
                 </ul>
             </div>
         </div>
     </div>
     
-    <!-- Модальное окно для добавления записи в историю -->
     <div id="history-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -641,7 +632,6 @@ header h1 i {
         </div>
     </div>
     
-    <!-- Модальное окно для добавления лаборанта -->
     <div id="lab-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -663,18 +653,17 @@ header h1 i {
     </div>
     
     <script>
-        // Данные для истории изменений
         const historyData = [
-        { 
-                description: 'Добавлен новый лаборант Mikhail Voronov',
-                date: '28 апреля 2025 года',
-                icon: 'fa-user-plus'
-            },
             { 
-                description: 'Обновлены профили всех лаборантов',
-                date: '28 апреля 2025 года',
+                description: 'Произведено глобальное обновление: добавлены все экс и действующие лаборанты',
+                date: '2 мая 2025 года',
                 icon: 'fa-refresh'
             },
+            // { 
+            //     description: 'Добавлен новый лаборант Mikhail Voronov',
+            //     date: '28 апреля 2025 года',
+            //     icon: 'fa-user-plus'
+            // },
             { 
                 description: 'Добавлено новое изменение',
                 date: '28 апреля 2025 года',
@@ -702,19 +691,18 @@ header h1 i {
             // }
         ];
 
-        // Данные для текущих лаборантов с аватарками и ролями
         const currentLab = [
             { 
                 name: 'Svyatoslav Travmatov', 
                 role: 'Head of LAB',
                 avatar: 'images/leonardo_cavalli.png',
-                skills: ['Глава Лаборатории', 'Криминалистика']
+                skills: ['Глава Лаборатории', 'Криминалистика', 'Следоведение']
             },
             { 
                 name: 'Mark Travmatov', 
                 role: 'D.Head of LAB',
                 avatar: 'images/sakura_riley.png',
-                skills: ['Зам.Главы Лаборатории', 'Криминалистика']
+                skills: ['Зам.Главы Лаборатории', 'Криминалистика', 'Следоведение']
             },
             { 
                 name: 'Peto Berlusconi', 
@@ -736,19 +724,36 @@ header h1 i {
             }
         ];
 
-        // Данные для экс-лаборантов
         const exLab = [
             { 
                 name: 'Hakushika Awayuki', 
                 role: 'Head of LAB',
                 avatar: 'images/hakushika_awayuki.png',
-                skills: ['Глава Лаборатории', 'Криминалистика']
+                skills: ['Глава Лаборатории', 'Криминалистика', 'Следоведение']
+            },
+            { 
+                name: 'Sam Waltez', 
+                role: 'Head of LAB',
+                avatar: 'images/sam_waltez.png',
+                skills: ['Глава Лаборатории', 'Криминалистика', 'Следоведение']
+            },
+            { 
+                name: 'Salvadore Mavrodi', 
+                role: 'Head of LAB',
+                avatar: 'images/salvadore_mavrodi.png',
+                skills: ['Глава Лаборатории', 'Криминалистика', 'Следоведение']
             },
             { 
                 name: 'Akane Sugamoto', 
                 role: 'Head of LAB',
                 avatar: 'images/akane_sugamoto.png',
-                skills: ['Глава Лаборатории', 'Криминалистика']
+                skills: ['Глава Лаборатории', 'Криминалистика', 'Следоведение']
+            },
+            { 
+                name: 'Klement Orlow', 
+                role: 'Эксперт-Криминалист',
+                avatar: 'images/klement_orlow.png',
+                skills: ['Криминалистика', 'Следоведение']
             },
             { 
                 name: 'Ethan Walsh', 
@@ -758,7 +763,6 @@ header h1 i {
             }
         ];
 
-        // Функция для отображения истории изменений
         const renderHistory = (filter = '') => {
             const historyList = document.getElementById('history-list');
             historyList.innerHTML = '';
@@ -791,7 +795,6 @@ header h1 i {
             });
         };
 
-        // Функция для отображения лаборантов
         const renderLabList = (labList, elementId, filter = '') => {
             const list = document.getElementById(elementId);
             list.innerHTML = '';
@@ -812,13 +815,11 @@ header h1 i {
                 const labPersonDiv = document.createElement('div');
                 labPersonDiv.className = 'lab-person';
 
-                // Создаем элемент <img> для аватарки
                 const img = document.createElement('img');
-                img.src = lab.avatar;  // Плейсхолдер аватарки
+                img.src = lab.avatar; 
                 img.alt = lab.name;
-                img.className = 'avatar-image'; // <--- добавил!
+                img.className = 'avatar-image';
                 
-                // Информация о лаборанте
                 const infoDiv = document.createElement('div');
                 infoDiv.className = 'lab-person-info';
                 
@@ -833,7 +834,6 @@ header h1 i {
                 infoDiv.appendChild(nameSpan);
                 infoDiv.appendChild(roleSpan);
                 
-                // Добавляем скиллы, если они есть
                 if (lab.skills && lab.skills.length > 0) {
                     const skillsDiv = document.createElement('div');
                     lab.skills.forEach(skill => {
@@ -850,7 +850,6 @@ header h1 i {
 
                 listItem.appendChild(labPersonDiv);
 
-                // Если это список текущих лаборантов, добавляем кнопку перевода в экс-лаборанты
                 if (elementId === 'current-lab') {
                     const transferButton = document.createElement('button');
                     transferButton.addEventListener('click', () => {
@@ -861,7 +860,6 @@ header h1 i {
                 list.appendChild(listItem);
             });
 
-            // Обновление счетчиков
             if (elementId === 'current-lab') {
                 document.getElementById('current-count').textContent = filteredList.length;
             } else if (elementId === 'ex-lab') {
@@ -869,16 +867,12 @@ header h1 i {
             }
         };
 
-        // Функция для перевода лаборанта в экс-лаборанты
         const transferLabPerson = (name) => {
-            // Перемещаем лаборанта из currentLab в exLab
             const personIndex = currentLab.findIndex(lab => lab.name === name);
             if (personIndex !== -1) {
                 const person = currentLab.splice(personIndex, 1)[0];
                 exLab.push(person);
 
-                // Добавляем запись в историю
-                // Добавляем запись в историю
                 historyData.unshift({
                     description: `${name} переведен(а) в экс-лаборанты`,
                     date: new Date().toLocaleDateString('ru-RU', {
@@ -889,14 +883,12 @@ header h1 i {
                     icon: 'fa-user-slash'
                 });
 
-                // Перерисовываем списки
                 renderLabList(currentLab, 'current-lab');
                 renderLabList(exLab, 'ex-lab');
                 renderHistory();
             }
         };
 
-        // Функция для добавления новой записи в историю
         const addHistoryRecord = (description) => {
             const newRecord = {
                 description: description,
@@ -912,7 +904,6 @@ header h1 i {
             renderHistory();
         };
         
-        // Функция для добавления нового лаборанта
         const addLabPerson = (name, role) => {
             const newPerson = {
                 name: name,
@@ -923,7 +914,6 @@ header h1 i {
             
             currentLab.push(newPerson);
             
-            // Добавляем запись в историю
             historyData.unshift({
                 description: `Добавлен новый лаборант ${name}`,
                 date: new Date().toLocaleDateString('ru-RU', {
@@ -938,22 +928,18 @@ header h1 i {
             renderHistory();
         };
 
-        // Инициализация при загрузке страницы
         document.addEventListener('DOMContentLoaded', () => {
             renderHistory();
             renderLabList(currentLab, 'current-lab');
             renderLabList(exLab, 'ex-lab');
             
-            // Функции для модальных окон
             const historyModal = document.getElementById('history-modal');
             const labModal = document.getElementById('lab-modal');
             
-            // Открытие модального окна для добавления записи в историю
             document.getElementById('add-history-btn').addEventListener('click', () => {
                 historyModal.style.display = 'block';
             });
             
-            // Закрытие модального окна для добавления записи в историю
             document.getElementById('close-history-modal').addEventListener('click', () => {
                 historyModal.style.display = 'none';
             });
@@ -962,7 +948,6 @@ header h1 i {
                 historyModal.style.display = 'none';
             });
             
-            // Сохранение новой записи в историю
             document.getElementById('save-history').addEventListener('click', () => {
                 const description = document.getElementById('history-description').value.trim();
                 if (description) {
@@ -972,12 +957,10 @@ header h1 i {
                 }
             });
             
-            // Открытие модального окна для добавления лаборанта
             document.getElementById('add-current-lab-btn').addEventListener('click', () => {
                 labModal.style.display = 'block';
             });
             
-            // Закрытие модального окна для добавления лаборанта
             document.getElementById('close-lab-modal').addEventListener('click', () => {
                 labModal.style.display = 'none';
             });
@@ -986,7 +969,6 @@ header h1 i {
                 labModal.style.display = 'none';
             });
             
-            // Сохранение нового лаборанта
             document.getElementById('save-lab').addEventListener('click', () => {
                 const name = document.getElementById('lab-name').value.trim();
                 const role = document.getElementById('lab-role').value.trim();
@@ -998,7 +980,6 @@ header h1 i {
                 }
             });
             
-            // Закрытие модальных окон при клике вне их области
             window.addEventListener('click', (event) => {
                 if (event.target === historyModal) {
                     historyModal.style.display = 'none';
@@ -1009,22 +990,18 @@ header h1 i {
             });
         });
 
-        // Поиск по истории изменений
         document.getElementById('history-search').addEventListener('input', (e) => {
             renderHistory(e.target.value);
         });
 
-        // Поиск по текущим лаборантам
         document.getElementById('current-lab-search').addEventListener('input', (e) => {
             renderLabList(currentLab, 'current-lab', e.target.value);
         });
 
-        // Поиск по экс-лаборантам
         document.getElementById('ex-lab-search').addEventListener('input', (e) => {
             renderLabList(exLab, 'ex-lab', e.target.value);
         });
 
-        // Переключение между вкладками
         document.querySelectorAll('.tab-button').forEach(button => {
             button.addEventListener('click', () => {
                 document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
@@ -1039,7 +1016,6 @@ header h1 i {
             });
         });
         
-        // Функция для генерации случайного цвета для аватарки
         const getRandomColor = () => {
             const letters = '0123456789ABCDEF';
             let color = '#';
@@ -1049,7 +1025,6 @@ header h1 i {
             return color;
         };
         
-        // Функция для получения инициалов из полного имени
         const getInitials = (name) => {
             return name.split(' ').map(n => n[0]).join('');
         };
@@ -1069,12 +1044,10 @@ header h1 i {
         }
     });
             
-            // Перерисовываем списки
             renderLabList(currentLab, 'current-lab');
             renderLabList(exLab, 'ex-lab');
         };
         
-        // Генерируем аватарки при загрузке страницы
         generateAvatars();
     </script>
 </body>

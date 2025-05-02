@@ -8,20 +8,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
-        // Проверка на авторизацию через sessionStorage
         if (!sessionStorage.getItem('loggedIn')) {
      window.location.href = '../login.html';
  }
      </script>
-
 <script>
     document.getElementById('logoutBtn').onclick = function() {
-        // Очистка sessionStorage
         sessionStorage.removeItem('isLoggedIn');
-        window.location.href = './lab.html'; // Перенаправление на страницу входа
+        window.location.href = './lab.html';
     }
 </script>
-
     <style>
         :root {
             --primary-color: #2c3e50;

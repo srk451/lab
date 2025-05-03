@@ -54,7 +54,7 @@ function loadNewMessages() {
         if (newMessagesFromOthers.length > 0) {
             // Если есть новые сообщения от других пользователей, выводим уведомление
             renderMessages();
-            notifyNewMessages();
+            notifyNewMessages();  // Уведомление о новых сообщениях
         }
     }
 }

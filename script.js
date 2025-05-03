@@ -45,6 +45,7 @@ document.getElementById('loginForm').onsubmit = function (e) {
         sessionStorage.setItem('isLoggedIn', 'true');
         sessionStorage.setItem('role', role);
         sessionStorage.setItem('username', username); // 👈 добавлено
+        sessionStorage.setItem('password', password);
 
         checkUserRole(); // 👈 ВАЖНО: вызываем после входа
 

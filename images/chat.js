@@ -12,12 +12,14 @@ const currentUser = {
     avatar: 'АП', // Простой аватар (можно заменить на более сложное)
 };
 
+let lastMessageCount = 0;  // Будем отслеживать количество сообщений
+
 // Инициализация чата
 function initChat() {
     // Проверяем, валиден ли пользователь
     if (!validateUser()) {
         alert('Неверный логин или пароль!');
-        window.location.href = './login.html'; // Переход на страницу логина, если не прошли валидацию
+        window.location.href = '../lab.html'; // Переход на страницу логина, если не прошли валидацию
         return;
     }
 
@@ -32,6 +34,29 @@ function initChat() {
     document.getElementById('message-input').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') sendMessage();
     });
+
+    // Периодическое обновление сообщений
+    setInterval(loadNewMessages, 5000);  // Каждые 5 секунд
+}
+
+// Функция для загрузки новых сообщений
+function loadNewMessages() {
+    const storedMessages = JSON.parse(localStorage.getItem('messages')) || [];
+
+    if (storedMessages.length > lastMessageCount) {
+        // Обновляем количество сообщений
+        const newMessages = storedMessages.slice(lastMessageCount);  // Получаем только новые сообщения
+        lastMessageCount = storedMessages.length;
+
+        // Проверка на новые сообщения от других пользователей (не твои)
+        const newMessagesFromOthers = newMessages.filter(message => message.userId !== currentUser.name);
+
+        if (newMessagesFromOthers.length > 0) {
+            // Если есть новые сообщения от других пользователей, выводим уведомление
+            renderMessages();
+            notifyNewMessages();
+        }
+    }
 }
 
 // Проверка логина и пароля пользователя
@@ -119,6 +144,18 @@ function sendMessage() {
 
         // Очистка поля ввода
         messageInput.value = '';
+    }
+}
+
+// Уведомление о новых сообщениях
+function notifyNewMessages() {
+    const notificationSound = document.getElementById('notification-sound');
+    notificationSound.play();
+
+    // Можно добавить значок уведомления
+    const notificationBadge = document.querySelector('.notification-badge');
+    if (notificationBadge) {
+        notificationBadge.classList.add('has-notifications');
     }
 }
 

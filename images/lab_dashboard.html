@@ -1,32 +1,406 @@
-<div class="header">
-    <h1>Лабораторный портал</h1>
-    <div class="profile-highlight">
-        <div id="current-user-profile" class="profile-info">
-            <h3>Загрузка...</h3>
-            <div class="profile-position">Загрузка...</div>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторный портал</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #0d47a1;
+            --accent: #5c6bc0;
+            --light: #e8eaf6;
+            --dark: #121212;
+            --success: #43a047;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+        
+        .nav-item {
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .nav-item:hover {
+            background-color: var(--light);
+        }
+        
+        .nav-item.active {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .content {
+            flex: 1;
+            padding: 2rem;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1rem;
+            transition: transform 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-data {
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .chat-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            padding: 0.75rem 1rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 8px 8px 0 0;
+            font-weight: 500;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .message {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+        
+        .message.own {
+            justify-content: flex-end;
+        }
+        
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .message-content {
+            background-color: var(--light);
+            padding: 0.75rem 1rem;
+            border-radius: 18px;
+            max-width: 70%;
+        }
+        
+        .message.own .message-content {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .message-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.25rem;
+        }
+        
+        .message-sender {
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+        
+        .message-position {
+            font-size: 0.75rem;
+            color: #666;
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+        }
+        
+        .message.own .message-position {
+            color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .message-text {
+            line-height: 1.4;
+        }
+        
+        .message-time {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 0.25rem;
+            text-align: right;
+        }
+        
+        .message.own .message-time {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+        
+        .chat-input input:focus {
+            border-color: var(--accent);
+        }
+        
+        .send-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .send-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .profile-highlight {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .profile-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 1rem;
+        }
+        
+        .profile-info h3 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .profile-position {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+        
+        .notification-badge {
+            position: relative;
+        }
+        
+        .notification-badge::after {
+            content: "";
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            width: 8px;
+            height: 8px;
+            background-color: #ff4081;
+            border-radius: 50%;
+            display: none;
+        }
+        
+        .notification-badge.has-notifications::after {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                padding: 1rem;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Лабораторный портал</h1>
+        <div class="profile-highlight">
+            <div id="current-user-profile" class="profile-info">
+                <h3>Загрузка...</h3>
+                <div class="profile-position">Загрузка...</div>
+            </div>
         </div>
     </div>
-</div>
-
-<!-- Чат -->
-<div class="section">
-    <h2>Лабораторный чат</h2>
-    <div class="chat-container">
-        <div class="chat-header">
-            Общий канал лаборатории
+    
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="nav-item active" data-section="dashboard">Главная</div>
+            <div class="nav-item" data-section="projects">Проекты</div>
+            <div class="nav-item" data-section="samples">Образцы</div>
+            <div class="nav-item" data-section="equipment">Оборудование</div>
+            <div class="nav-item" data-section="journal">Журнал</div>
+            <div class="nav-item" data-section="calendar">Календарь</div>
+            <div class="nav-item notification-badge" data-section="chat">Чат</div>
+            <div class="nav-item" data-section="settings">Настройки</div>
         </div>
-        <div class="chat-messages" id="chat-messages">
-            <!-- Сообщения будут загружены из JavaScript -->
-        </div>
-        <div class="chat-input">
-            <input type="text" id="message-input" placeholder="Введите сообщение...">
-            <button class="send-btn" id="send-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855a.5.5 0 0 0-.041.9l4.995 1.877a.5.5 0 0 0 .557-.136l7.946-9.002a.5.5 0 1 1 .75.75L6.96 8.194a.5.5 0 0 0-.149.543l1.847 5.027a.5.5 0 0 0 .921.097l6.666-13.667a.5.5 0 0 0-.281-8z"/>
-                </svg>
-            </button>
+        
+        <div class="content">
+            <div class="section">
+                <h2>Обзор лаборатории</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-title">Активные проекты</div>
+                        <div class="card-data">8</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Образцы на анализе</div>
+                        <div class="card-data">42</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Задачи на сегодня</div>
+                        <div class="card-data">12</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Сотрудники в смене</div>
+                        <div class="card-data">5</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Лабораторный чат</h2>
+                <div class="chat-container">
+                    <div class="chat-header">
+                        Общий канал лаборатории
+                    </div>
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- Сообщения будут загружены из JavaScript -->
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="message-input" placeholder="Введите сообщение...">
+                        <button class="send-btn" id="send-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855a.5.5 0 0 0-.041.9l4.995 1.877a.5.5 0 0 0 .557-.136l7.946-9.002a.5.5 0 1 1 .75.75L6.96 8.194a.5.5 0 0 0-.149.543l1.847 5.027a.5.5 0 0 0 .921.097l6.666-13.667a.5.5 0 0 0-.281-8z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="chat.js"></script>
+    <!-- Звуковой файл уведомления -->
+    <audio id="notification-sound" preload="auto">
+        <source src="notification.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Подключение внешнего скрипта -->
+    <script src="chat.js"></script>
+</body>
+</html>

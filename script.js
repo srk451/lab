@@ -19,6 +19,9 @@ window.onclick = function (event) {
 const users = {
     "c3Jr": { password: "c2lzZW1iYWV2", role: "owner" },
     "YWRtaW5jYXZhbGxp": { password: "Y2F2aGxhYnRvcA==", role: "admin" },
+    "bGFidmxhZGRpc2VsbGFi": { password: "ZGlzZWxsYWJvcmFudHRvcA==", role: "laborant" },
+    "bGFicGV0b2Jlcmx1c2xhYg==": { password: "bGFib3JhbnRwZXRvdG9w", role: "laborant" },
+    "bGFibGFibWlzaGF2b3Jvbm92": { password: "bGFib3JhbnRtaXNoYWxhYnhk", role: "laborant" }
 };
 
 // Проверка роли пользователя и скрытие кнопки "Войти" для user

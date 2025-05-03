@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Лабораторный портал</title>
+    <link rel="icon" href="./laboratory.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script>
+        if (!sessionStorage.getItem('loggedIn')) {
+     window.location.href = '../login.html';
+ }
+     </script>
     <style>
         :root {
             --primary: #1a237e;
@@ -1345,31 +1351,38 @@
         "c3Jr": { 
             password: "c2lzZW1iYWV2", 
             role: "owner",
-            displayName: "Александр Петров",
-            position: "Руководитель лаборатории",
-            avatar: "АП" 
+            displayName: "Mark Travmatov",
+            position: "Заместитель Администратора Лаборатории",
+            avatar: 'MT'
         },
         "YWRtaW5jYXZhbGxp": { 
             password: "Y2F2aGxhYnRvcA==", 
             role: "admin",
-            displayName: "Мария Иванова",
-            position: "Старший специалист",
-            avatar: "МИ" 
+            displayName: "Svyatoslav Travmatov",
+            position: "Администратор Лаборатории",
+            avatar: "ST" 
         },
         // Добавлены новые пользователи для демонстрации
-        "dXNlcjE=": { 
-            password: "cGFzc3dvcmQx", 
-            role: "user",
-            displayName: "Иван Соколов",
-            position: "Лаборант",
-            avatar: "ИС" 
+        "bGFidmxhZGRpc2VsbGFi": { 
+            password: "ZGlzZWxsYWJvcmFudHRvcA==", 
+            role: "laborant",
+            displayName: "Vlad Disel",
+            position: "Мед.Эксперт",
+            avatar: "VD" 
         },
-        "dXNlcjI=": { 
-            password: "cGFzc3dvcmQy", 
-            role: "user",
-            displayName: "Елена Новикова",
-            position: "Лаборант-исследователь",
-            avatar: "ЕН" 
+        "bGFibGFibWlzaGF2b3Jvbm92": { 
+            password: "bGFib3JhbnRtaXNoYWxhYnhk", 
+            role: "laborant",
+            displayName: "Mikhail Voronov",
+            position: "Эксперт-Криминалист",
+            avatar: "MV" 
+        },
+        "bGFicGV0b2Jlcmx1c2xhYg==": { 
+            password: "bGFib3JhbnRwZXRvdG9w", 
+            role: "laborant",
+            displayName: "Peto Berlusconi",
+            position: "Эксперт-Криминалист",
+            avatar: "PB" 
         }
     };
 
@@ -1765,39 +1778,6 @@
         }
     }
 
-    // Генерация случайного сообщения (для демо)
-    function generateRandomMessage() {
-        const users = [
-            { name: "Мария Иванова", avatar: "МИ", position: "Старший специалист" },
-            { name: "Иван Соколов", avatar: "ИС", position: "Лаборант" },
-            { name: "Елена Новикова", avatar: "ЕН", position: "Лаборант-исследователь" }
-        ];
-        
-        const messages = [
-            "Коллеги, не забудьте про калибровку масс-спектрометра в 15:00.",
-            "Новые реактивы доставлены. Вы можете получить их на складе.",
-            "Кто может помочь с обработкой данных по проекту 'Анализ почвы'?",
-            "Собрание отменено, будет перенесено на завтра. Время уточню позже.",
-            "Результаты анализов готовы. Отправил отчет всем по электронной почте."
-        ];
-        
-        const randomUser = users[Math.floor(Math.random() * users.length)];
-        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-        
-        // Получаем текущее время
-        const now = new Date();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        const timeString = `${hours}:${minutes}`;
-        
-        return {
-            userId: randomUser.name,
-            userAvatar: randomUser.avatar,
-            userPosition: randomUser.position,
-            text: randomMessage,
-            time: timeString
-        };
-    }
 
     // Для демонстрации нового сообщения каждые 30 секунд
     setInterval(() => {
